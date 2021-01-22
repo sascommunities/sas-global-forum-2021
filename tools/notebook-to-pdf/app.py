@@ -70,7 +70,8 @@ def createPdf(mdfile, pdffile):
 
     data = subprocess.run([
         'pandoc',
-        '-o', pdffile,
+        '-o', 
+        pdffile,
         mdfile
     ], stdout=subprocess.PIPE)
     data = data.stdout.decode('utf8')
