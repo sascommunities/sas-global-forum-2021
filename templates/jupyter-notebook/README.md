@@ -10,9 +10,11 @@ We're really excited that, starting with SAS Global Forum 2021, those presenting
 1. The data publicly available (Kaggle, sashelp, UCI, etc) or you will provide the data along with your paper.
 1. The data a reasonable size (not too big)
 
-## How does this template work?
+## How to use this template
 
-This template works in just the same way that the Microsoft Word template, and any other template that you might have used, works. Just download it and, following the instructions regarding style contained with, write your paper!
+This template works in just the same way that the Microsoft Word template, and any other template that you might have used, works. Download it and, following the instructions regarding style contained with, write your paper!
+
+Clone this repository and copy this folder and its contents to the `papers` folder renaming the folder on the way to your paper number, e.g. `1141-2021`. Then, from within the new folder that you just created, write your paper by following the installation and configuration instructions below.
 
 ## SAS with Jupyter
 
