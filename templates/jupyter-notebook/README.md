@@ -18,11 +18,11 @@ This template works in just the same way that the Microsoft Word template, and a
 
 Summary:
 
-1. Install Python 3
-2. Install Jupyter Notebook
-3. Install the sas_kernel
-4. Create a `sascfg_personal.py` file to connect to your SAS instance (or modify the one shipped with SASPy)
-
+1. Install Python 3 [(instructions)](https://www.python.org/downloads/)
+2. Install Jupyter Notebook [(instructions)](https://jupyter.org/install.html)
+3. Start a Python virtual environment `python -m venv env` and activate it `. env/bin/activate`
+3. Install the repository's dependencies `pip install -r requirements.txt`
+4. Update the `sascfg_personal.py` file to connect to your SAS instance
 
 The key to using SAS with Jupyter is the functionality of the SAS kernel, which allows SAS programmers to use the Jupyter notebook interface to submit and review the results of SAS code.
 
