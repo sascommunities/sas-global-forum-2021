@@ -10,19 +10,21 @@ We're really excited that, starting with SAS Global Forum 2021, those presenting
 1. The data publicly available (Kaggle, sashelp, UCI, etc) or you will provide the data along with your paper.
 1. The data a reasonable size (not too big)
 
-## How does this template work?
+## How to use this template
 
-This template works in just the same way that the Microsoft Word template, and any other template that you might have used, works. Just download it and, following the instructions regarding style contained with, write your paper!
+This template works in just the same way that the Microsoft Word template, and any other template that you might have used, works. Download it and, following the instructions regarding style contained with, write your paper!
+
+Clone this repository and copy this folder and its contents to the `papers` folder renaming the folder on the way to your paper number, e.g. `1141-2021`. Then, from within the new folder that you just created, write your paper by following the installation and configuration instructions below.
 
 ## SAS with Jupyter
 
 Summary:
 
-1. Install Python 3
-2. Install Jupyter Notebook
-3. Install the sas_kernel
-4. Create a `sascfg_personal.py` file to connect to your SAS instance (or modify the one shipped with SASPy)
-
+1. Install Python 3 [(instructions)](https://www.python.org/downloads/)
+2. Install Jupyter Notebook [(instructions)](https://jupyter.org/install.html)
+3. Start a Python virtual environment `python -m venv env` and activate it `. env/bin/activate`
+3. Install the repository's dependencies `pip install -r requirements.txt`
+4. Update the `sascfg_personal.py` file to connect to your SAS instance
 
 The key to using SAS with Jupyter is the functionality of the SAS kernel, which allows SAS programmers to use the Jupyter notebook interface to submit and review the results of SAS code.
 
