@@ -56,7 +56,7 @@ def populateVariables(file, vars):
     print('done')
 
 def parseCmdArguments():
-    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser = argparse.ArgumentParser(description='You _can_ export the Jupyter Notebooks to PDF (via LaTex) but when you do that through the notebook the styles are not applied. This tool allows us to apply the SGF paper styling from the sugconf latex class (with a couple of modifications for the quirks of Markdown).')
     
     parser.add_argument(
         '--notebook-dir', 
