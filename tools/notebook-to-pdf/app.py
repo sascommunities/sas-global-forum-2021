@@ -6,6 +6,7 @@ import tempfile
 from distutils import dir_util, file_util
 import subprocess
 from fileinput import FileInput
+import logging
 
 logging.basicConfig()
 root = logging.getLogger()
@@ -15,6 +16,34 @@ handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] - %(message)
 variables = []
 header = True
 footer = True
+
+def configure_logging(verbose):
+    """
+    """
+    # required to get the hack below about changing the root logger
+    logging.basicConfig()
+
+    root = logging.getLogger()
+    handler = root.handlers[0]
+    handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] - %(message)s'))
+    if verbose:
+        logging.getLogger().setLevel(logging.DEBUG)
+    else:
+        logging.getLogger().setLevel(logging.INFO)
+
+    logging.debug("Logging initalized.")
+
+def str2bool(v):
+    """
+    """
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('True', 'yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('False', 'no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 def populateVariables(file, vars):
     """
@@ -31,11 +60,31 @@ def parseCmdArguments():
     
     parser.add_argument(
         '--notebook-dir', 
-        metavar='N',
+        metavar='d',
         dest='notebook_dir',
         type=str, 
         nargs=1,
-        help='an integer for the accumulator'
+        help='The directory which contains the notebook and the supporting files'
+    )
+
+    parser.add_argument(
+        '--output-dir', 
+        metavar='o',
+        dest='output_dir',
+        type=str, 
+        nargs=1,
+        help='The directory where the PDF and Tex (see --include-tex) files should be copied to.'
+    )
+
+    parser.add_argument(
+        '--include-tex', 
+        metavar='t',
+        dest='include_tex',
+        default=False,
+        type=str2bool,
+        const=True,
+        nargs='?',
+        help='For debugging, manual adjustment '
     )
 
     return parser.parse_args()
@@ -79,6 +128,10 @@ def extractNotebookData(notebook, td):
         paper_data.append('\n')
         paper_data.append(''.join(['```sas\n',''.join(cell['source']),'\n```\n']))
         paper_data.append('\n')
+
+        # TODO: Workout how to possible include text/html things from display_data nodes       
+        # TODO: Decide if it is worth including stream data (log)?     
+
         return True
 
     with open(notebook, 'r') as f:
@@ -209,12 +262,9 @@ def main():
     """
     args = parseCmdArguments()
 
-    # validate notebook metadata
-    # extract cells based on metadata
-    
-    # populate variables in tex file
-    # create PDF
-
+    # TODO: validate output-dir
+    # TODO: validate input-dir
+    # TODO: validate notebook metadata
 
     for nd in args.notebook_dir:
         for file in os.listdir(nd):
@@ -224,7 +274,7 @@ def main():
 
                         dir_util.copy_tree(nd, td)
                         file_util.copy_file('header.tex', td)
-                        file_util.copy_file('sugconf.cls', td)
+                        file_util.copy_file('sugconf_jupyter.cls', td)
                         file_util.copy_file('sasbanner.png', td)
 
                         home = os.getcwd()
@@ -240,7 +290,6 @@ def main():
 
                             full_tex = os.path.join(td,tex_file)
 
-                            # writeMarkdownTempFile('/'.join([md_file,file]), markdown)
                             writeMarkdownTempFile(md_file, markdown)
                             try:
                                 createSrcTex(md_file, tex_file)
@@ -248,9 +297,14 @@ def main():
                                 populateVariables(full_tex, variables)
                                 createPdf(full_tex)
                                 
-                                file_util.copy_file(pdf_file, home)
+                                file_util.copy_file(pdf_file, args.output_dir[0])
+                                if args.include_tex:
+                                    file_util.copy_file(tex_file, args.output_dir[0])
+
                             except Exception as e:
                                 print(str(e))
+
+                        os.chdir(home)
 
 if __name__ == '__main__':
     main()

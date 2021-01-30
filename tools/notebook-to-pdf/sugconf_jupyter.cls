@@ -51,7 +51,7 @@
 \setlength\headheight{72.0pt}
 \addtolength{\textheight}{-72.0pt}
 \addtolength{\topmargin}{-1.0in}
-\chead{\includegraphics[width=4in]{sasbanner}}
+\chead{\includegraphics[width=5in]{sasbanner}}
         \ifthenelse{\boolean{PageNumbers}}%%K&D pg 335
                    {\relax}%
                    %LaTeX Companion pg 92: maketitle -> #1
@@ -150,15 +150,15 @@
               {\color{sasblue}\normalsize\bfseries\uppercase}%
              }%end section definition
 \renewcommand{\subsubsection}{\@startsection
-              {subsubsection}{3}{0pt}{0.5\baselineskip}{\runInHead}%
+              {subsubsection}{3}{0pt}{0.5\baselineskip}{1sp}%
               {\color{sasblue}\bfseries}%
              }%end section definition
 \renewcommand{\paragraph}{\@startsection
-              {paragraph}{4}{0pt}{0.5\baselineskip}{\runInHead}%
+              {paragraph}{4}{0pt}{0.5\baselineskip}{1sp}%
               {\color{sasblue}\bfseries\itshape}%
              }%end section definition
 \renewcommand{\subparagraph}{\@startsection
-              {subparagraph}{5}{0pt}{0.5\baselineskip}{\runInHead}%
+              {subparagraph}{5}{0pt}{0.5\baselineskip}{1sp}%
               {\color{sasblue}\bfseries}%
              }%end section definition
 
