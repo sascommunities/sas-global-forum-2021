@@ -27,3 +27,4 @@ From the command line: `python app.py`
 
 * See commends in app.py
 * Also make this an independent executable so that people can just download and run it if they want to.
+* Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands
