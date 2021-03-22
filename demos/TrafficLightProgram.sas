@@ -105,13 +105,13 @@
  /* Browse/Review a few rows of the original data    */
  /*     ----------------------------------------     */
 title 'sashelp.Demographics - Formatted';
-proc print data=sashelp.Demographics(obs=10);
+proc print data=sashelp.Demographics(obs=10) noobs;
   var cont id iso name pop maleschoolpct femaleschoolpct; 
 run;
 title;
 title 'sashelp.Demographics - UnFormatted';
-proc print data=sashelp.Demographics(obs=10);
-  var cont id iso name pop maleschoolpct femaleschoolpct; 
+proc print data=sashelp.Demographics(obs=10) noobs;
+  var maleschoolpct femaleschoolpct; 
 	format maleschoolpct femaleschoolpct;
 run;
 title;
@@ -149,7 +149,7 @@ data work.Education;
   set sashelp.Demographics
 	    (keep=pop maleschoolpct femaleschoolpct 
        rename=(pop=Population));
-	NetPrimaryPct = round(sum(0,maleschoolpct,femaleschoolpct)/2,0.02);
+	NetPrimaryPct = round(sum(0,maleschoolpct,femaleschoolpct)/2,0.01);
 	format NetPrimaryPct percent9.2;
 run;
 
@@ -432,6 +432,7 @@ title;
  /* and will still present with the TrafficLight     */
  /* data driven coloration in the PDF.               */ 
  /*--------------------------------------------------*/
+/*options orientation=landscape dtreset;*/
 options orientation=landscape nodate;
 title "Primary Education Enrollment by Country";
 title2 "Highlight All Data";
@@ -526,7 +527,7 @@ proc sql;
 					 else 'Group Z No-Grp'
          end as LitGrp,
 	       count(NetPrimaryPct) as Count,
-         round(avg(NetPrimaryPct),0.02) as AvgPct
+         round(avg(NetPrimaryPct),0.01) as AvgPct
 		from work.Education
    group by LitGrp
    order by LitGrp;
@@ -594,7 +595,7 @@ proc sql;
   create table work.EducationSum as
 	select LitGrp,
 	       count(NetPrimaryPct) as Count,
-         round(avg(NetPrimaryPct),0.02) as AvgPct
+         round(avg(NetPrimaryPct),0.01) as AvgPct
 		from work.EducationGrp
    group by LitGrp
    order by LitGrp;
@@ -818,7 +819,7 @@ data work.Education    (keep=CountryID Population NetPrimaryPct
   set sashelp.Demographics
 	    (keep=pop maleschoolpct femaleschoolpct
        rename=(pop=Population)) end=eof;
-	NetPrimaryPct = round(sum(0,maleschoolpct,femaleschoolpct)/2,0.02);
+	NetPrimaryPct = round(sum(0,maleschoolpct,femaleschoolpct)/2,0.01);
   select;
     when (NetPrimaryPct >= 0.9) do;
 			Grp90Sum + NetPrimaryPct;
@@ -855,27 +856,27 @@ data work.Education    (keep=CountryID Population NetPrimaryPct
 	select (eof);
 	  when (1) do;
       LitGrp = 'Group A 90+';
-		  AvgPct = round((Grp90Sum/Grp90Cnt), 0.02);
+		  AvgPct = round((Grp90Sum/Grp90Cnt), 0.01);
 			Count  = Grp90Cnt;
 			output work.EducationSum;
       LitGrp = 'Group B 80';
-		  AvgPct = round((Grp80Sum/Grp80Cnt), 0.02);
+		  AvgPct = round((Grp80Sum/Grp80Cnt), 0.01);
 			Count  = Grp80Cnt;
 			output work.EducationSum;
       LitGrp = 'Group C 70';
-		  AvgPct = round((Grp70Sum/Grp70Cnt), 0.02);
+		  AvgPct = round((Grp70Sum/Grp70Cnt), 0.01);
 			Count  = Grp70Cnt;
 			output work.EducationSum;
       LitGrp = 'Group D 60';
-		  AvgPct = round((Grp60Sum/Grp60Cnt), 0.02);
+		  AvgPct = round((Grp60Sum/Grp60Cnt), 0.01);
 			Count  = Grp60Cnt;
 			output work.EducationSum;
       LitGrp = 'Group E 50';
-		  AvgPct = round((Grp50Sum/Grp50Cnt), 0.02);
+		  AvgPct = round((Grp50Sum/Grp50Cnt), 0.01);
 			Count  = Grp50Cnt;
 			output work.EducationSum;
       LitGrp = 'Group F <50';
-		  AvgPct = round((GrpLowSum/GrpLowCnt), 0.02);
+		  AvgPct = round((GrpLowSum/GrpLowCnt), 0.01);
 			Count  = GrpLowCnt;
 			output work.EducationSum;	
       LitGrp = 'Group G Missing';
@@ -986,3 +987,6 @@ run;
        p0edl20cvxxmm9n1i9ht3n21eict.htm&locale=en)
  */
 
+ /* To see how SAS color names map to hex values */
+proc registry list startat="COLORNAMES";
+run;
