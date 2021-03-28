@@ -22,8 +22,8 @@ From the command line: `python app.py`
 | `--notebook-dir` or `-d` | The directory which contains the notebook and the supporting files  |
 | `--output-dir` or `-o` | The directory where the PDF and Tex (see --include-tex) files should be copied to. |
 | `--include-tex` or `-t` | (optional) For debugging, manual adjustment |
-| `--markdown-file` or `-t` | (optional) If you already have a markdown file, and you just want to make an SGF PDF. |
-| `--bibliography` or `-t` | (optional) If you have a bibliography and you want to include it. |
+| `--markdown-file` or `-m` | (optional) If you already have a markdown file, and you just want to make an SGF PDF. |
+| `--bibliography` or `-b` | (optional) If you have a bibliography and you want to include it. |
 
 ## TODO
 - See comments in `app.py`

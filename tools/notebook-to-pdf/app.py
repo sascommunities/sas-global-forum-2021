@@ -98,7 +98,7 @@ def parseCmdArguments():
 
     parser.add_argument(
         '--bibliography', 
-        metavar='m',
+        metavar='b',
         dest='bib_source',
         type=str,
         nargs=1,
