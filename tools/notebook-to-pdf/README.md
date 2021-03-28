@@ -22,9 +22,10 @@ From the command line: `python app.py`
 | `--notebook-dir` or `-d` | The directory which contains the notebook and the supporting files  |
 | `--output-dir` or `-o` | The directory where the PDF and Tex (see --include-tex) files should be copied to. |
 | `--include-tex` or `-t` | (optional) For debugging, manual adjustment |
+| `--markdown-file` or `-t` | (optional) If you already have a markdown file, and you just want to make an SGF PDF. |
+| `--bibliography` or `-t` | (optional) If you have a bibliography and you want to include it. |
 
 ## TODO
-
-* See commends in app.py
-* Also make this an independent executable so that people can just download and run it if they want to.
-* Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands
+- See comments in `app.py`
+- [ ] Also make this an independent executable so that people can just download and run it if they want to.
+- [ ] Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands

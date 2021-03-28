@@ -7,6 +7,7 @@ from distutils import dir_util, file_util
 import subprocess
 from fileinput import FileInput
 import logging
+import frontmatter
 
 logging.basicConfig()
 root = logging.getLogger()
@@ -53,7 +54,6 @@ def populateVariables(file, vars):
         report = FileInput(file, inplace=True)
         for line in report:
             print(line.replace(subme,str(var[1])), end='')
-    print('done')
 
 def parseCmdArguments():
     parser = argparse.ArgumentParser(description='You _can_ export the Jupyter Notebooks to PDF (via LaTex) but when you do that through the notebook the styles are not applied. This tool allows us to apply the SGF paper styling from the sugconf latex class (with a couple of modifications for the quirks of Markdown).')
@@ -85,6 +85,24 @@ def parseCmdArguments():
         const=True,
         nargs='?',
         help='For debugging, manual adjustment '
+    )
+
+    parser.add_argument(
+        '--markdown-file', 
+        metavar='m',
+        dest='markdown_source',
+        type=str,
+        nargs=1,
+        help='Use this argument if you want to make a SGF paper from markdown and not a notebook. Full path to file required.'
+    )
+
+    parser.add_argument(
+        '--bibliography', 
+        metavar='m',
+        dest='bib_source',
+        type=str,
+        nargs=1,
+        help='Use this argument if you want to make a SGF paper from markdown and not a notebook. Full path to file required.'
     )
 
     return parser.parse_args()
@@ -160,8 +178,8 @@ def extractNotebookData(notebook, td):
                 
                 # title
                 if 'title' in cell['metadata']['tags']:
-                    # TODO: strip new lines
-                    variables.append(('PAPER_TITLE',cell['source'][0][2:]))
+                    title = cell['source'][0][2:].replace('\n','')
+                    variables.append(('PAPER_TITLE',title))
                     continue
                 
                 # abstract
@@ -195,21 +213,41 @@ def extractNotebookData(notebook, td):
 
     return variables, paper_data
 
-def createSrcTex(md_file, tex_file):
+def createSrcTex(md_file, tex_file, references):
     """
     """
     try:
-        data = subprocess.run([
-            'pandoc',
-            '-s', 
-            md_file,
-            '-o',
-            tex_file
-        ], stdout=subprocess.PIPE)
-        if data.returncode == 0:
-            return True
+        print()
+        if references is not None:
+            data = subprocess.run([
+                'pandoc',
+                '--filter',
+                'pandoc-citeproc',
+                '-s', 
+                md_file,
+                '--bibliography',
+                references[0],
+                '--csl',
+                os.path.join(os.getcwd(), 'american-medical-association.csl'),
+                '-o',
+                tex_file
+            ], stdout=subprocess.PIPE)
+            if data.returncode == 0:
+                return True
+            else:
+                return data.stdout.decode('utf8')
         else:
-            return data.stdout.decode('utf8')
+            data = subprocess.run([
+                'pandoc',
+                '-s', 
+                md_file,
+                '-o',
+                tex_file
+            ], stdout=subprocess.PIPE)
+            if data.returncode == 0:
+                return True
+            else:
+                return data.stdout.decode('utf8')            
 
     except Exception as e:
         print(str(e))
@@ -260,13 +298,74 @@ def createPdf(tex_file):
 def main():
     """
     """
+    output_dir = None
+    notebook_dir = None
     args = parseCmdArguments()
 
-    # TODO: validate output-dir
-    # TODO: validate input-dir
+    if args.notebook_dir is not None:
+        if not os.path.exists(args.notebook_dir):
+            logging.error("Output directory {} does not exist".format(args.notebook_dir[0]))
+            system.exit(1)
+        else:
+            notebook_dir =args.notebook_dir[0]
+
+    if args.output_dir is not None:
+        if not os.path.exists(args.output_dir[0]):
+            logging.error("Output directory {} does not exist".format(args.output_dir[0]))
+            system.exit(1)
+        else:
+            output_dir= args.output_dir[0]
+    else:
+        if notebook_dir is not None:
+            output_dir = notebook_dir
+        else:
+            output_dir = os.path.dirname(args.markdown_source[0])
+        
     # TODO: validate notebook metadata
 
-    for nd in args.notebook_dir:
+    if args.markdown_source is not None and os.path.exists(args.markdown_source[0]):
+        with tempfile.TemporaryDirectory() as td:
+            logging.info('Creating everything in ' + td)
+
+            if args.bib_source is not None:
+                file_util.copy_file(args.bib_source[0], td)
+
+            file_util.copy_file(args.markdown_source[0], td)
+            file_util.copy_file('american-medical-association.csl', td)
+            file_util.copy_file('header.tex', td)
+            file_util.copy_file('sugconf_jupyter.cls', td)
+            file_util.copy_file('sasbanner.png', td)
+
+            home = os.getcwd()
+            os.chdir(td)
+
+            md_file = os.path.join(td, os.path.basename(args.markdown_source[0]) )
+            tex_file = md_file[:-3] + ".tex"
+            pdf_file = tex_file[:-4] + ".pdf"
+
+            full_tex = os.path.join(td,tex_file)
+
+            try:
+                paper = frontmatter.load(md_file)
+                variables = []
+                for v in paper.metadata:
+                    variables.append((v,paper.metadata[v]))
+                createSrcTex(md_file, tex_file, args.bib_source)
+                createSgfTex(tex_file)
+                populateVariables(full_tex, variables)
+                createPdf(full_tex)
+                
+                file_util.copy_file(pdf_file, output_dir)
+                if args.include_tex:
+                    file_util.copy_file(tex_file, output_dir)
+
+            except Exception as e:
+                print(str(e))
+
+            os.chdir(home)
+    
+    if args.notebook_dir is not None and os.path.exists(args.notebook_dir[0]):
+        nd = args.args.notebook_dir[0]
         for file in os.listdir(nd):
             if file.endswith(".ipynb"):
                     with tempfile.TemporaryDirectory() as td:
@@ -292,7 +391,7 @@ def main():
 
                             writeMarkdownTempFile(md_file, markdown)
                             try:
-                                createSrcTex(md_file, tex_file)
+                                createSrcTex(md_file, tex_file, args.bib_source)
                                 createSgfTex(tex_file)
                                 populateVariables(full_tex, variables)
                                 createPdf(full_tex)
