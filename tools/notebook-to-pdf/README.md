@@ -26,6 +26,6 @@ From the command line: `python app.py`
 | `--bibliography` or `-b` | (optional) If you have a bibliography and you want to include it. |
 
 ## TODO
-- See comments in `app.py`
-- [ ] Also make this an independent executable so that people can just download and run it if they want to.
-- [ ] Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands
+    - [ ] Make this an independent executable so that people can just download and run it if they want to.
+    - [X] Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands
+    - [ ] Allow someone to pass their own, or just a different, CSL.
