@@ -2,7 +2,7 @@
 
 You _can_ export the Jupyter Notebooks to PDF (via LaTex) but when you do that through the notebook the styles are not applied. This tool allows us to apply the SGF paper styling from the `sugconf` latex class (with a couple of modifications for the quirks of Markdown).
 
-This tool is comes with a user beware notice. The extent of the test is the purest definition of "it works on my laptop".
+This tool is comes with a user beware notice. The extent of the testing on this tool is the purest definition of "it works on my laptop".
 
 ## Requirements
 
