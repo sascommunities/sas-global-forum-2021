@@ -102,7 +102,16 @@ def parseCmdArguments():
         dest='bib_source',
         type=str,
         nargs=1,
-        help='Use this argument if you want to make a SGF paper from markdown and not a notebook. Full path to file required.'
+        help='Use this argument if you want to pass in a bibliography for references.'
+    )
+
+    parser.add_argument(
+        '--csl', 
+        metavar='c',
+        dest='csl_source',
+        type=str,
+        nargs=1,
+        help='Use this argument if you want to pass in your own CSL for formatting references.'
     )
 
     return parser.parse_args()
@@ -213,12 +222,17 @@ def extractNotebookData(notebook, td):
 
     return variables, paper_data
 
-def createSrcTex(md_file, tex_file, references):
+def createSrcTex(md_file, tex_file, references, csl):
     """
     """
     try:
-        print()
         if references is not None:
+
+            if csl is None:
+                csl = os.path.join(os.getcwd(), 'american-medical-association.csl')
+            else:
+                csl = os.path.join(os.getcwd(), csl)
+
             data = subprocess.run([
                 'pandoc',
                 '--filter',
@@ -228,7 +242,7 @@ def createSrcTex(md_file, tex_file, references):
                 '--bibliography',
                 references[0],
                 '--csl',
-                os.path.join(os.getcwd(), 'american-medical-association.csl'),
+                csl,
                 '-o',
                 tex_file
             ], stdout=subprocess.PIPE)
@@ -318,7 +332,6 @@ def htmlEntities(tex_file):
                 value = entities[key]
                 if key in line:
                     line = line.replace(key, value)
-                    print(line)
             writer.write(line)
 
     return True
@@ -358,6 +371,12 @@ def main():
             if args.bib_source is not None:
                 file_util.copy_file(args.bib_source[0], td)
 
+            if args.csl_source is not None:
+                file_util.copy_file(args.csl_source[0], td)
+                csl_file = os.path.basename(args.csl_source[0])
+            else: 
+                csl_file = None
+
             file_util.copy_file(args.markdown_source[0], td)
             file_util.copy_file('american-medical-association.csl', td)
             file_util.copy_file('header.tex', td)
@@ -378,15 +397,17 @@ def main():
                 variables = []
                 for v in paper.metadata:
                     variables.append((v,paper.metadata[v]))
-                createSrcTex(md_file, tex_file, args.bib_source)
+                createSrcTex(md_file, tex_file, args.bib_source, csl_file)
                 createSgfTex(tex_file)
                 populateVariables(full_tex, variables)
                 htmlEntities(full_tex)
                 createPdf(full_tex)
                 
                 file_util.copy_file(pdf_file, output_dir)
+                print("{} created in {}".format(os.path.basename(pdf_file), output_dir))
                 if args.include_tex:
                     file_util.copy_file(tex_file, output_dir)
+                    print("{} file stored in {}".format(os.path.basename(tex_file), output_dir))
 
             except Exception as e:
                 print(str(e))
