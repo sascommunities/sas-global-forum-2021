@@ -28,6 +28,16 @@ From the command line: `python app.py`
 | `--csl` or `-c` | (optional) If you want the references to look different, you can use any valid [CSL](https://github.com/citation-style-language/styles).  |
 | `--include-tex` or `-t` | (optional) For debugging, manual adjustments, etc. |
 
+#### Example
+
+```bash
+git clone https://github.com/sascommunities/sas-global-forum-2021
+cd sas-global-forum-2021/tools/notebook-to-pdf
+python3 -m venv env
+. env/bin/activate
+```
+
+
 ## TODO
 
 - [X] Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands
