@@ -31,4 +31,4 @@ From the command line: `python app.py`
 - [ ] Workout how to possibly include text/html things from display_data nodes if notebook has been run  
 - [ ] Make this an independent executable so that people can just download and run it if they want to.
 - [X] Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands
-- [ ] Allow someone to pass their own, or just a different, CSL.
+- [X] Allow someone to pass their own, or just a different, CSL.
