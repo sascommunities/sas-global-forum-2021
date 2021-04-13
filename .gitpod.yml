@@ -1,5 +1,5 @@
 tasks:
-  - init: export PIP_USER=false && 
+  - init: export PIP_USER=false && python3 -m pip install --upgrade pip 
   
 image:
   file: .gitpod.dockerfile
