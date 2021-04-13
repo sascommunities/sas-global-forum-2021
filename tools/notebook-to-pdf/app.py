@@ -295,6 +295,34 @@ def createPdf(tex_file):
     except Exception as e:
         print(str(e))
 
+def htmlEntities(tex_file):
+
+    entities = {
+        "&nbsp;":"nobreakspace",
+        "&lt;":"$\leq$",
+        "&gt;":"$>$",
+        "&cent;":"\textcent",
+        "&pound;":"\textsterling",
+        "&yen;":"\textyen",
+        "&euro;":"\texteuro",
+        "&copy;":"\copy",
+        "&reg;":"\circledR"
+    }
+
+    with open(tex_file, 'r') as reader:
+        file = reader.readlines()
+
+    with open(tex_file, 'w') as writer:
+        for line in file:
+            for key in entities:
+                value = entities[key]
+                if key in line:
+                    line = line.replace(key, value)
+                    print(line)
+            writer.write(line)
+
+    return True
+
 def main():
     """
     """
@@ -353,6 +381,7 @@ def main():
                 createSrcTex(md_file, tex_file, args.bib_source)
                 createSgfTex(tex_file)
                 populateVariables(full_tex, variables)
+                htmlEntities(full_tex)
                 createPdf(full_tex)
                 
                 file_util.copy_file(pdf_file, output_dir)
