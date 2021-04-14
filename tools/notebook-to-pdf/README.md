@@ -32,10 +32,9 @@ From the command line: `python app.py`
 
 ```bash
 git clone https://github.com/sascommunities/sas-global-forum-2021
-cd sas-global-forum-2021/tools/notebook-to-pdf
+cd tools/notebook-to-pdf
 python3 -m venv env
 . env/bin/activate
-export PIP_USER=false # if a gitpod env
 pip install -r requirements.txt
 python3 app.py --markdown-file /workspace/sas-global-forum-2021/tools/notebook-to-pdf/DEMO.md --output-dir /tmp
 ```
