@@ -32,7 +32,7 @@ From the command line: `python app.py`
 
 ```bash
 git clone https://github.com/sascommunities/sas-global-forum-2021
-cd tools/notebook-to-pdf
+cd sas-global-forum-2021/tools/notebook-to-pdf
 python3 -m venv env
 . env/bin/activate
 pip install -r requirements.txt
