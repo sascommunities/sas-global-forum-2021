@@ -2,8 +2,8 @@
 PAPER_TITLE: Scaffolding SAS® Projects With NPM and SASjs
 PAPER_AUTHORS: Allan Bowe
 PAPER_NUMBER: 1135-2021
-LAUNCH_CMD1: # follow instructions in /workspace/sas-global-forum-2021/tools/notebook-to-pdf/README.md and run below from THAT directory
-LAUNCH_CMD2: python3 app.py --markdown-file /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects/README.md --output-dir /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects
+# follow instructions in /workspace/sas-global-forum-2021/tools/notebook-to-pdf/README.md and run below from THAT directory
+# python3 app.py --markdown-file /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects/README.md --output-dir /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects
 ---
 
 ## ABSTRACT
@@ -298,6 +298,10 @@ You can also perform all three of the previous steps (compile, build, deploy) in
 sajs cbd  # will deploy to the specified defaultTarget in sasjsconfig
 ```
 
+![](https://camo.githubusercontent.com/ad8b29b31494a46a4c2526a8efa2e75743f974007a6a2eaf1fde8ce9d3159f28/68747470733a2f2f692e696d6775722e636f6d2f67495970354f472e706e67)
+
+More details here:  https://cli.sasjs.io/deploy
+
 So - what else is there?
 
 ## SASjs JOB EXECUTE
@@ -309,6 +313,8 @@ sasjs job execute jobs/extract/makedata1 -l sasjsbuild/makedata1.log -t viya
 ```
 
 The job path can be relative (to the appLoc) or a full path.  The log path can also be relative (to the sasjs folder) or a full path.
+
+More details here:  https://cli.sasjs.io/job
 
 ## SASjs FLOW EXECUTE
 
