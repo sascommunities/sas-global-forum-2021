@@ -1,14 +1,16 @@
 ---
-PAPER_TITLE: Writing SAS&reg;  Global Forum papers in Markdown
+PAPER_TITLE: Scaffolding SAS® Projects With NPM and SASjs 
 PAPER_AUTHORS: Allan Bowe
 PAPER_NUMBER: 1135-2021
-LAUNCH_CMD1: # follow instructions in /workspace/sas-global-forum-2021/tools/notebook-to-pdf/README.md
+LAUNCH_CMD1: # follow instructions in /workspace/sas-global-forum-2021/tools/notebook-to-pdf/README.md and run below from THAT directory
 LAUNCH_CMD2: python3 app.py --markdown-file /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects/README.md --output-dir /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects
 ---
 
 ## ABSTRACT
 
-Is your SAS scattered across SAS folders, local directories and server file systems? Are your deliverables delayed by the need to build tools? Does your deployment process involve manual steps?
+Is your SAS scattered across SAS folders, local directories and server file systems? 
+Are your deliverables delayed by the need to build tools? 
+Does your deployment process involve manual steps?
 
 The SASjs framework enables code consistency across teams and projects, de-risks the use of shared tools and dependencies, and facilitates continuous deployment to SAS environments. The framework can be applied to SAS® Viya® jobs, SAS® 9 Stored Processes, and even regular SAS programs on a file system. Join this session and learn how to create (scaffold) a SASjs project, add a job, add a macro dependency, add a program (include) dependency, add job init and term files, deploy the jobs to SAS, and run them as part of a flow. I will share the secret of how to deploy to SAS Viya without a client and secret. And, the entire demo will be performed from a local text editor (VSCode).
 
@@ -18,42 +20,41 @@ The SASjs framework enables code consistency across teams and projects, de-risks
 If you are a SAS Developer with two or more projects under your belt, you'll be familiar with the fact that SAS affords incredible flexibility when it comes to development and deployment.  Every company has different standards, and even you yourself have probably developed some coding habits that are not shared by your colleagues.
 
 
-
-As it happens, this same situation applies also to JS (JavaScript).  JS is a very flexible, loose language, and can easily be mis-used to create spaghetti projects that are hard to maintain and difficult to debug.  In response, the industry has created a number of frameworks that 'wrap around' JS to provide structure and consistency in the way projects are built - such as React, Angular, and Vue.  This is great for application owners, as it makes it much easier to on-board new developers, and it reduces the total cost of ownership, as well as maintaining development velocity as each application becomes increasingly complex.
-
+As it happens, this same situation applies also to JS (JavaScript) - a flexible and loosely typed language, often mis-used to create spaghetti projects that are hard to maintain and difficult to debug.  In response to this situation, various frameworks have evolved that 'wrap around' JS to provide structure and consistency in the way projects are built - such as React, Angular, and Vue.  This is great for application owners, making it easier to on-board new developers, and reducing the total cost of ownership, whilst maintaining development velocity as application complexity increases.
 
 
-The goal of SASjs is to provide a structure, set of opinions, and a suite of tools so that developers can spend more time on the things that matter - ie, rapid delivery of business value, to any SAS platform, in a repeatable and scalable fashion.
+The goal of SASjs is to provide such a framework for SAS - a structure, set of opinions, and suite of productivity tools.  This enables developers to spend more time on the things that matter - ie, rapid delivery of business value, to any SAS platform, in a repeatable and scalable fashion.
+
+In this paper we walk through the process of setting up a SASjs project in terms of:
+
+* deployment
+* execution
+* documentation
+* testing
 
 
-
-In this paper we walk through the process of setting up a project, deploying it, executing it and documenting it.
-
-## THE SASJS FRAMEWORK
+## THE SASjs FRAMEWORK
 The SASjs Framework provides a set of tools to abstract away the common complexities of a typical SAS deployment.  Each of these tools can be used individually, or together as part of a cohesive and integrated approach to managing the SAS application lifecycle - ie project setup, development, compilation, deployment, execution, testing, documentation, and more.
-
 
 
 The core components are:
 
+* [sasjs/adapter](https://adapter.sasjs.io) - handles SASLogon authentication and communication between frontend and backend
+* [sasjs/cli](https://cli.sasjs.io) - a Command Line Interface for automating common tasks
+* [sasjs/core](https://core.sasjs.io) - a library with over 120 SAS macros geared towards application developers
 
-
-sasjs/adapter - handles SASLogon authentication and communication between frontend and backend
-sasjs/cli - a Command Line Interface for automating common tasks
-sasjs/core - a library with over 120 SAS macros geared towards application developers
 Other components include:
 
+* sasjs/vscode-extension - SAS code execution, syntax highlighting and linting in the VS Code IDE
+* sasjs/lint - the linter is used in both the VS Code extension and the SASjs CLI
+* numerous seed apps ready to kick start a SAS project
 
-
-sasjs/vscode-extension - SAS code execution, syntax highlighting and linting in the VS Code IDE
-sasjs/lint - the linter is used in both the VS Code extension and the SASjs CLI
-numerous seed apps ready to kick start a SAS project
 There are even a series of ready-made apps, built using the framework.
 
 
+## GETTING STARTED
 
-GETTING STARTED
- There are some pre-requisites to install before continuing:
+There are some pre-requisites to install before continuing:
 
 
 
