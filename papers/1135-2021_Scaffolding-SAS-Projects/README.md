@@ -162,9 +162,30 @@ There are some additional sections in this header that must be observed.  The Da
 
 The SAS Macros / SAS Includes sections are used by `sasjs compile` to identify, and then insert, Macros and Programs at the beginning of each compiled job.
 
-Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) are simply inserted into the beginning of the Job/Sevice, the SAS Includes are a bit trickier to manage - if SAS code is simply inserted into a Job, it is then executed at the start, which isn't that useful.
+Feel free to add some SAS code at the bottom of your new job!  Perhaps even commit it to a GIT repository.
 
-For this reason, the SAS Includes are first wrapped in `put` statements to a user-designated fileref - where they can be subsequently `%include`'d.  The compiled code will then look something like this (where FREF1` is user-provided):
+That's as far as we'll go with modifying the repo - the rest of the paper is about compiling, building, depoying, testing & documenting the code.
+
+## SASjs COMPILE
+
+The compilation process is about taking all of the dependencies (SAS Macros & Includes) and creating **one file per Job/Service/Test**.
+
+Why do this?  Isn't this against the philosophy of having a single macro definition, in a catalog or SASAUTOS fileref, and using it everywhere?
+
+Maybe this was a good idea back in the days when disk space was scarce, and developers worked without source control.  These days, thanks to tools like GIT, it's very easy to track changes to a file.  And with a move to container based runtimes, like Viya 4, there is a need to move away from OS filesystems.  Finally, if you have ever tried to debug a complex macro application, you'll quickly discover how challenging it can be to unearth all the underlying macros from a monolothic enterprise estate.
+
+The SASjs approach is to compile ALL dependencies so each Job / Test / Service is **fully self contained**, and can live inside the metadata of a Stored Process or a Viya Job description.  The impact on runtimes and storage is negligible, more than compensated by the ease of debugging and the portability of the jobs.  In addition, it becomes easy to track which jobs have which macros (as they must be listed in the program header in order to be compiled).
+
+To execute the compilation process then, simply run:
+
+```bash
+sasjs compile
+```
+This takes all the jobs/services/tests and creates the self-contained files inside the (temporary) "sasjsbuild" folder.
+
+Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) can be easily inserted into the beginning of the Job/Sevice, the SAS Includes are a bit trickier to manage - if SAS code is simply inserted into a Job, it is then executed at the start, which isn't that useful.
+
+For this reason, the SAS Includes are first wrapped in `put` statements to a user-designated fileref - where they can be subsequently `%include`'d.  The compiled code will then look something like this (where `FREF1` is user-provided):
 
 ```sas
 filename FREF1 temp;
@@ -185,30 +206,15 @@ put '        primary key(tx_from, vara));';
 run;
 ```
 
+This program can then be easily invoked anywhere in job with a single line of code:
 
-
-Feel free to add some SAS code at the bottom of your new job!  Perhaps even commit it to a GIT repository.
-
-That's as far as we'll go with modifying the repo - the rest of the paper is about compiling, building, depoying, testing & documenting the code.
-
-## SASjs COMPILE
-
-The compilation process is about taking all of the dependencies (SAS Macros & Includes) and creating ** one file per Job/Service/Test**.
-
-Why do this?  Isn't this against the philosophy of having a single macro definition, in a catalog or SASAUTOS fileref, and using it everywhere?
-
-Maybe this was a good idea back in the days when disk space was scarce, and developers worked without source control.  These days, thanks to tools like GIT, it's very easy to track changes to a file.  And with a move to container based runtimes, like Viya 4, there is a need to move away from filesystem based code management.  Finally, if you have ever tried to debug someone elses macro application, you'll quickly discover how challenging it can be to unearth all the underlying macros from a monolothic enterprise estate.
-
-The SASjs approach is to compile ALL dependencies so each Job / Test / Service is **fully self contained**, and can live inside the metadata of a Stored Process or a Viya Job description.  The impact on runtimes and storage is negligible, more than compensated by the ease of debugging and the portability of the jobs.  In addition, it becomes easy to track which jobs have which macros (as they must be listed in the program header in order to be compiled).
-
-To execute the compilation process then, simply run:
-
-```bash
-sasjs compile
+```sas
+%inc fref1;
 ```
-This takes all the jobs/services/tests and creates the self-contained files inside the (temporary) "sasjsbuild" folder.
 
-What next?  We could have hundreds of these.  How do we get them all up to the SAS server?
+More info here:  https://cli.sasjs.io/compile
+
+What next?  We could have hundreds of these compiled files.  How do we push them all up to the SAS server?
 
 ## SASjs BUILD
 
@@ -238,7 +244,9 @@ To create our build back then, on the target named "viya", we will run:
 sasjs build -t viya
 ```
 
-This generates our build program and JSON file in the root of the `sasjsbuild` folder.  How to get that up to the server?
+More info here:  https://cli.sasjs.io/build
+
+So, whave generated our build program and JSON file in the root of the `sasjsbuild` folder.  How to get that up to the server?
 
 
 ## SASjs DEPLOY
@@ -246,7 +254,7 @@ This generates our build program and JSON file in the root of the `sasjsbuild` f
 The actual deployment process will vary depending on the server and level of access you have.  Our demo will focus on using Viya REST APIs, but if you are on SAS 9 then you have two options available:
 
 1) Run the SAS program in Enterprise Guide or SAS Studio (you can of course also do this in Viya, without the need for a client/secret)
-2) Use CURL as part of a bash script in your `deployScripts` array to be %included as part of an STP in your home directory
+2) Use CURL as part of a bash script in your `deployScripts` array to be `%include`d as part of an STP in your home directory
 
 We are working on a more integrated way to manage this, possibly using the [SAS 9 REST API](https://sas9api.io) to create the STPs directly.  Get in touch if you'd like to engage us to push this forward.
 
@@ -258,14 +266,14 @@ A client/secret pair is necessary to grant the SASjs CLI permission to deploy to
 
 We take the following security precautions:
 
-* Basic (user/pass) authentication is not supported.  Use authorization_code grant_type when creating the client/secret.
+* Basic (user/pass) authentication is not supported.  Use authorization_code grant type when creating the client/secret.
 * Tokens are stored in a `.env` file that is included in `.gitignore` to prevent accidental commits
 
-To generate your client/secret you will need the helpf of an administrator, who has the filesystem permissions to access the consul token.
+To generate your client/secret you will need the help of an administrator, who has the filesystem permissions to access the consul token.
 
 We have built the [Viya Token Generator](https://sasjs.io/apps/#viya-client-token-generator) web app to make this proces super easy.
 
-You can also generate a client / secret (and access / refresh token) using SAS code using the @sasjs/core macros.
+You can also generate a client / secret (and access / refresh token) using SAS code using the [@sasjs/core](https://core.sasjs.io) macros.
 
 ```sas
 /* compile the macros from github */
@@ -276,27 +284,13 @@ filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %mv_registerclient(outds=clientinfo)
 ```
 
-This will generate a URL in the log, which must be followed to generate a refresh code (one time step). Paste that code into the macro below to generate an access / refresh token:
-
-```sas
-/* paste the code below */
-%mv_tokenauth(inds=clientinfo,code=xET8ETs74z)
-
-/* extract client, secret & token to the log */
-data _null_;
-  merge mv_tokenauth clientinfo(drop=error);
-  put client_id=;
-  put client_secret=;
-run;
-```
-
 Ok, you have your client & secret.  Now what?  Don't procrastinate.  Authenticate!
 
 ### SASjs ADD CRED
 
 We need to assign credentials to the particular target (server details) to which we are deploying.  This makes sense if you consider that you could be deploying to multiple machines (dev / test /prod) or server types (sas9 / viya).
 
-The following command will give you a series of prompts to authenticate against the "viya" target - enter your client, secret, serverUrl, click the URL to fetch the authorisation code, paste, and finally choose a Compute Context on which you'd like to perform operations.
+The following command will give you a series of prompts to authenticate against the "viya" target - you can now enter your client / secret / serverUrl, click the URL to fetch the authorisation code, paste, and finally choose a Compute Context on which you'd like to perform operations.
 
 ```bash
 sasjs add cred -t viya
@@ -314,12 +308,12 @@ sasjs deploy -t viya
 
 Well done!  This is the first step in an iterative, GIT-centric, dev-ops orientated coding paradigm for SAS.
 
-You can work safely (locally) in a feature branch, deploy your code to a personal appLoc, test your code, before finally merging to a development or main/master branch.
+You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, test your code, before finally merging to a development or main/master branch.
 
 You can also perform all three of the previous steps (compile, build, deploy) in just one short command:
 
 ```bash
-sajs cbd  # will deploy to the specified defaultTarget in sasjsconfig
+sajs cbd
 ```
 
 ![](https://camo.githubusercontent.com/ad8b29b31494a46a4c2526a8efa2e75743f974007a6a2eaf1fde8ce9d3159f28/68747470733a2f2f692e696d6775722e636f6d2f67495970354f472e706e67)
@@ -376,7 +370,9 @@ The aim in building a test framework is to make it very easy to write tests for 
 
 Tests will be compiled as web services, so that you can (optionally) return JSON to indicate the success / failure of one or more tests.
 
-Test coverage is determined simply by the existence of at least one file per Job / Service.  Jobs will typically be tested by examining the outputs created.  Services can be tested by calling them with various inputs, eg using `proc stp` or the [mv_jobwaitfor](https://core.sasjs.io/mv__jobwaitfor_8sas.html) macro.  Coverage is displayed when running `sasjs compile`.
+Test coverage is determined simply by the existence of at least one file per Job / Service, and details displayed when running `sasjs compile`.
+
+Jobs may be tested by examining the outputs created.  Services can be tested by calling them with various inputs, eg using `proc stp` or the [mv_jobwaitfor](https://core.sasjs.io/mv__jobwaitfor_8sas.html) macro.
 
 Additional tests can also be defined in the `testFolders` array.  When running `sasjs test`, a `testsetup.sas` file is executed first, then all the tests, and finally a `testteardown.sas`.
 
@@ -440,8 +436,8 @@ Whilst primarily sponsored by [Analytium](https://analytium.co.uk) the project i
 
 Your comments and questions are valued and encouraged. Contact the author at:
 
-> Allan Bowe
-> Email: allan.bowe@analytium.co.uk
+* Email: allan.bowe@analytium.co.uk
+* LinkedIn: https://www.linkedin.com/in/allanbowe
 
 SAS and all other SAS Institute Inc. product or service names are registered trasemarks or trademarks of SAS Institue Inc. in the USA and other Countries &reg; indiciates USA registration.
 
