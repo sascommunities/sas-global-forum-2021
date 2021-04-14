@@ -328,6 +328,22 @@ sasjs flow execute -s sasjs/jobflow.json -l sasjsbuild --csvFile sasjsbuild/resu
 
 More details here:  https://cli.sasjs.io/flow
 
+# SASjs DOC
+
+The great benefit of using Doxygen is the ability to generate documentation for Jobs, Services, Macros, Program Includes, and Tests.
+
+The `sasjs doc` command will take metadata from the package.json file, use the README.md as a homepage, and even generate a data lineage graphviz diagram using the defined "Data Inputs" and "Data Outputs" in your program headers.  Clicking on a job will open the job in the documentation, and you can even click through the tables into the [Data Controller for SAS&reg;](https://datacontroller.io) Data Viewer.
+
+The logo and other such settings can all be configured in the [docConfig](https://cli.sasjs.io/sasjsconfig.html#docConfig).
+
+To run the command, simply execute:
+
+```bash
+sasjs doc
+```
+
+The outputs will go into the sasjsbuild/docs folder.  More info here: https://cli.sasjs.io/doc
+
 ## CONCLUSION
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
