@@ -344,17 +344,73 @@ sasjs doc
 
 The outputs will go into the sasjsbuild/docs folder.  More info here: https://cli.sasjs.io/doc
 
+## SASjs TEST
+
+The latest addition to the SASjs Framework is SASjs Test.  At the time of writing this part isn't _actually_ live yet...  However it's very close!!!  So I've written the paper above as though it already exists.  Here is the [pull request](https://github.com/sasjs/cli/issues/607).
+
+The aim in building a test framework is to make it very easy to write tests for Jobs, Services and Macros.  With this in mind, all you need to do, is create a same named test file named  `yourjobname.test.sas`.  You are recommended to do this in the same folder as the original Job / Service.  Any files suffixed `.test.sas` will be compiled and deployed to a seperate `appLoc/tests/xxx` subfolder.
+
+Tests will be compiled as web services, so that you can (optionally) return JSON to indicate the success / failure of one or more tests.
+
+Test coverage is determined simply by the existence of at least one file per Job / Service.  Jobs will typically be tested by examining the outputs created.  Services can be tested by calling them with various inputs, eg using `proc stp` or the [mv_jobwaitfor](https://core.sasjs.io/mv__jobwaitfor_8sas.html) macro.  Coverage is displayed when running `sasjs compile`.
+
+Additional tests can also be defined in the `testFolders` array.  When running `sasjs test`, a `testsetup.sas` file is executed first, then all the tests, and finally a `testteardown.sas`.
+
+The aim is to provide a very simple structure, that is very easy to extend, to encourage more programmers to write tests when developing code.
+
+
+## SASJS LINT
+
+A linter is used to examine source code for common problems, before it is deployed or committed to source control.  The [SASjs linter](https://github.com/sasjs/lint) is available in the [VS Code extension](https://github.com/sasjs/vscode-extension) (see "Problems" tab) or as a SASjs [ClI command](https://cli.sasjs.io/lint).
+
+The great thing about the command (`sasjs lint`) is that you can add it as a pre-commit hook, to prevent questionable code from making it into your repository!
+
+What is questionable?  Good question.  It can vary from site to site.  For that reason, it's fully configurable.  To set up the config you can run `sasjs lint init`.  As of April 2021 we have the current settings, but plan to add many more:
+
+```JSON
+{
+    "noEncodedPasswords": true,
+    "hasDoxygenHeader": true,
+    "hasMacroNameInMend": true,
+    "hasMacroParentheses": true,
+    "indentationMultiple": 2,
+    "lowerCaseFileNames": true,
+    "maxLineLength": 80,
+    "noNestedMacros": true,
+    "noSpacesInFileNames": true,
+    "noTabIndentation": true,
+    "noTrailingSpaces": true
+}
+```
+
+If you'd like to see any specific tests in your SAS code, you are welcome to contribute, or contact us to see if we can put them in for you.
+
+## THE FUTURE
+
+Beyond additional functionalities in VS Code (improved linting and formatting) and general framework support, the future for SASjs includes the following major items:
+
+* Full integration with SAS 9 (eg using the [SAS 9 REST API](https://sas9api.io))
+* NodeJS server for Base SAS (enabling SAS Apps and Dev Ops for traditional SAS users)
+
+If you'd benefit from the above, do get in touch.
+
+
 ## CONCLUSION
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+SASjs was built originally to support [Data Controller](https://datacontroller.io) and the development of Web Apps on SAS.  Since then it has matured into an enterprise framework to enable Dev Ops and automated deployment for all types of SAS Platform.
+
+It is fully open source (MIT) and can be used for any purpose without encumbrances or a need for attribution.
+
+Whilst primarily sponsored by [Analytium](https://analytium.co.uk) the project itself is independent and fully open for other collaborators.  We need help, and additional sponsors, and would love to hear from you!
+
 
 ## ACKNOWLEDGMENTS
 
-Thanks to everyone for reading this!
+* [Analytium](https://analytium.co.uk) for being the primary project sponsor
+* The entire team at [SAS Apps](https://sasapps.io) for doing the development
+* The developers of [Doxygen](https://www.doxygen.nl/index.html)
+* All the [customers](https://datacontroller.io/category/use-cases/) of [Data Controller](https://www.doxygen.nl/index.html) who funded the initial framework
 
-## RECOMMENDED READING
-
-All the book!
 
 ## CONTACT INFORMATION
 
@@ -367,9 +423,15 @@ SAS and all other SAS Institute Inc. product or service names are registered tra
 
 Other brand and product names are trademarks of their respective companies.
 
-## REFERENCES
+## Links
 
-[//]: # ""You only need to add references here that you haven't automatically added or referenced using Zoreto.""
+* SASjs Main Site: https://sasjs.io
+* Macro Core docs: https://core.sasjs.io
+* CLI docs: https://cli.sasjs.io
+* Adapter docs: https://adapter.sasjs.io
+* Data Controller:  https://datacontroller.io
+* Data Controller docs:  https://docs.datacontroller.io
+* SAS Apps website: https://sasapps.io
 
 
 
