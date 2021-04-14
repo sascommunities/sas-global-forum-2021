@@ -71,7 +71,7 @@ To check you have everything installed correctly, try running:
 npm -v
 ```
 
- This should return a version number.  If not, go back and check your installation of NodeJS (did you add the correct folder to your PATH if running the portable version?  If in VS Code, did you try re-opening the editor?)
+This should return a version number.  If not, go back and check your installation of NodeJS (did you add the correct folder to your PATH if running the portable version?  If in VS Code, did you try re-opening the editor?)
 
 
 If you have a version number, you are ready to install the SASjs CLI.  Simply run:
@@ -104,21 +104,20 @@ Here you will see a number of files:
 | db                 | This folder contains the DDL for creating the various libraries.  It is split with one subfolder per libref.                                                                         |
 | .git               | System folder for managing GIT history                                                                                                                                               |
 | .github            | Contains example github actions should you wish to perform automated SASjs checks, eg as part of a pull request or merge                                                             |
-| .gitignore         | List of files and folders to be ignored by GIT (won't be committed to source control)                                                                                                |
-| .gitpod.dockerfile | Used for gitpod demos, can be ignored / removed                                                                                                                                      |
-| .gitpod.yml        | Used for gitpod demos, can be ignored / removed                                                                                                                                      |
+| .gitignore         | List of files and folders to be ignored by GIT (won't be committed to source control)     |
+| .gitpod.dockerfile | Used for gitpod demos, can be ignored / removed                           |
+| .gitpod.yml        | Used for gitpod demos, can be ignored / removed  |
 | includes           | Default location for SAS Programs to be %included in SAS Jobs, Services, or Tests                                                                                                    |
-| jobs               | Main parent folder containing jobinit.sas and jobterm.sas as well as subdirectories for SAS Jobs                                                                                     |
-| macros             | Default location for SAS Macros                                                                                                                                                      |
-| node_modules       | System folder for storing third party packages, such as @sasjs/core                                                                                                                  |
+| jobs| Main parent folder containing jobinit.sas and jobterm.sas as well as subdirectories for SAS Jobs  |
+| macros             | Default location for SAS Macros |
+| node_modules       | System folder for storing third party packages, such as @sasjs/core|
 | package.json       | Main config file for the repo, lists all the project dependencies as well as example scripts (npm run SCRIPTNAME) and project metadata                                               |
-| package-lock.json  | System file for managing dependencies of dependencies                                                                                                                                |
-| README.md          | The main page describing your project.  Is also used as the homepage when running `sasjs doc`.                                                                                       |
+| package-lock.json  | System file for managing dependencies of dependencies|
+| README.md          | The main page describing your project.  Is also used as the homepage when running `sasjs doc`.|
 | sasjs              | The folder containing the `sasjsconfig.json` file, which contains the settings for the entire project - such as where the various files are located (both locally and remotely).     |
 | .sasjslint         | Settings used when checking SAS Jobs, Services, Tests, Macros and Programs for code quality issues such as encoded passwords, trailing spaces, macros without parentheses, etc etc.  |
 | tests              | Alternative location for storing tests.  Normally we recommend that tests live alongside the relevant Job/Service/Macro, eg jobname.test.sas or macroname.test.sas                   |
-| .vscode            | Folder containing VSCode dependencies, such as the default 80 char ruler, and the recommendation to use the SASjs extension.                                                         |
-|||
+| .vscode            | Folder containing VSCode dependencies, such as the default 80 char ruler, and the recommendation to use the SASjs extension. |
 
 This project is 'ready to build' however to explain the process, let's add a new job.
 
@@ -159,11 +158,36 @@ The header looks like this:
 
 For a longer, better description of Doxygen, please see Paper 1077-2021 (Introduction to Doxygen) by Tom Bellmer.
 
-There are some additional sections in this header that must be observed.  When running `sasjs compile` (next section), these `<h4>` sections will be scanned to extract the relevant ` @li` items - so that the appropriate SAS Macros and SAS Includes are inserted into the beginning of each compiled job.
+There are some additional sections in this header that must be observed.  The Data Inputs / Outputs section is used by `sasjs doc` to generate a graphviz diagram of the data lineage.
 
-The Data Inputs / Outputs section is used by `sasjs doc` to generate a graphviz diagram of the data lineage.
+The SAS Macros / SAS Includes sections are used by `sasjs compile` to identify, and then insert, Macros and Programs at the beginning of each compiled job.
 
-Feel free to add some SAS code at the bottom of this file!  Perhaps even commit it to a GIT repository.
+Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) are simply inserted into the beginning of the Job/Sevice, the SAS Includes are a bit trickier to manage - if SAS code is simply inserted into a Job, it is then executed at the start, which isn't that useful.
+
+For this reason, the SAS Includes are first wrapped in `put` statements to a user-designated fileref - where they can be subsequently `%include`'d.  The compiled code will then look something like this (where FREF1` is user-provided):
+
+```sas
+filename FREF1 temp;
+data _null_;
+file FREF1 lrecl=32767;
+put '/**';
+put '  @file';
+put '  @brief DDL for demotable1';
+put '**/';
+put 'proc sql;';
+put 'create table &mylib..demotable1(';
+put '        tx_from num not null format=datetime19.3';
+put '        ,tx_to num not null format=datetime19.3';
+put '        ,vara varchar(10) not null';
+put '        ,varb varchar(32) not null';
+put '    ,constraint pk_demotable1';
+put '        primary key(tx_from, vara));';
+run;
+```
+
+
+
+Feel free to add some SAS code at the bottom of your new job!  Perhaps even commit it to a GIT repository.
 
 That's as far as we'll go with modifying the repo - the rest of the paper is about compiling, building, depoying, testing & documenting the code.
 
