@@ -28,17 +28,23 @@ From the command line: `python app.py`
 | `--csl` or `-c` | (optional) If you want the references to look different, you can use any valid [CSL](https://github.com/citation-style-language/styles).  |
 | `--include-tex` or `-t` | (optional) For debugging, manual adjustments, etc. |
 
-#### Example
+### Gitpod Example
+
+From within the remote vscode terminal:
 
 ```bash
-git clone https://github.com/sascommunities/sas-global-forum-2021
-cd sas-global-forum-2021/tools/notebook-to-pdf
-python3 -m venv env
+cd tools/notebook-to-pdf
+python -m venv env
 . env/bin/activate
 pip install -r requirements.txt
-python3 app.py --markdown-file /workspace/sas-global-forum-2021/tools/notebook-to-pdf/DEMO.md --output-dir /tmp
+python app.py --markdown-file ./DEMO.md
 ```
 
+This will create a Markdown file called  DEMO.pdf in the `tools/notebook-to-pdf` directory. You could then create a PDF version of your own Markdown paper by running something like:
+
+```bash
+python app.py --markdown-file ../../papers/0000-2021-Smith/My_amazing_SGF_paper.md
+```
 
 ## TODO
 

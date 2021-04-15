@@ -17,3 +17,11 @@ If you're new to GitHub and would like to see a walkthrough of a pull request, w
 * [Connecting the Dots between SAS Viya Products](./demos/connect-the-dots)
 * [The Power of SAS SQL](./demos/power-of-sql)
 * [SAS Procedure Output: Using Formats with ODS Style Options to Produce a Trafficlighting Effect](./demos/Trafficlight)
+
+## Gitpod
+
+This repository has been enabled to work with [Gitpod](https://www.gitpod.io/).
+
+Gitpod does to Dev Environments what Docker did to Servers 🐳. Gitpod is an [open source platform](https://github.com/gitpod-io/gitpod) for automated and ready-to-code development environments. It enables developers to describe their dev environment as code and start instant and fresh development environments for each new task directly from your browser.
+
+This is a great way to try out the Markdown/Notebook to PDF conversion tool.
