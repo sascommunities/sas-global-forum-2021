@@ -366,6 +366,8 @@ The great benefit of using Doxygen is the ability to generate documentation for 
 
 The `sasjs doc` command will take metadata from the package.json file, use the README.md as a homepage, and even generate a data lineage graphviz diagram using the defined "Data Inputs" and "Data Outputs" in your program headers.  Clicking on a job will open the job in the documentation, and you can even click through the tables into the [Data Controller for SAS&reg;](https://datacontroller.io) Data Viewer.
 
+![](https://i.imgur.com/QOZDYra.png)
+
 The logo and other such settings can all be configured in the [docConfig](https://cli.sasjs.io/sasjsconfig.html#docConfig).
 
 To run the command, simply execute:
@@ -374,7 +376,12 @@ To run the command, simply execute:
 sasjs doc
 ```
 
-The outputs will go into the sasjsbuild/docs folder.  More info here: https://cli.sasjs.io/doc
+![](https://i.imgur.com/7oxNugk.png)
+
+The outputs will go into the sasjsbuild/docs folder.
+
+
+More info here: https://cli.sasjs.io/doc
 
 ## SASjs TEST
 
