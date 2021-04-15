@@ -77,7 +77,7 @@ This should return a version number.  If not, go back and check your installati
 If you have a version number, you are ready to install the SASjs CLI.  Simply run:
 
 ```bash
-npm i -g @sasjs/cli
+npm install -g @sasjs/cli
 ```
 
 This will install the SASjs CLI globally, such that you can run the `sasjs` command from any directory.  You can verify this by running:
@@ -246,7 +246,7 @@ sasjs build -t viya
 
 More info here:  https://cli.sasjs.io/build
 
-So, whave generated our build program and JSON file in the root of the `sasjsbuild` folder.  How to get that up to the server?
+So, we have generated our build program and JSON file in the root of the `sasjsbuild` folder.  How to get that up to the server?
 
 
 ## SASjs DEPLOY
