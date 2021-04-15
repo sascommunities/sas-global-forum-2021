@@ -183,7 +183,7 @@ sasjs compile
 ```
 This takes all the jobs/services/tests and creates the self-contained files inside the (temporary) "sasjsbuild" folder.
 
-![sasjs compile command](https://i.imgur.com/PGpILjA.png)
+![sasjs compile command](PGpILjA.png)
 
 Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) can be easily inserted into the beginning of the Job/Sevice, the SAS Includes are a bit trickier to manage - if SAS code is simply inserted into a Job, it is then executed at the start, which isn't that useful.
 
@@ -226,7 +226,7 @@ That program can then be easily invoked anywhere in the actual job with a single
 
 The following diagram illustrates this concept, looking specifically at Services and Macros (the idea is the same for Jobs and Tests, with both Macros and Includes):
 
-![](https://cli.sasjs.io/img/sasjscompile.png)
+![sasjs compile](https://cli.sasjs.io/img/sasjscompile.png)
 
 More info here:  https://cli.sasjs.io/compile
 
@@ -260,7 +260,7 @@ To create our build back then, on the target named "viya", we will run:
 sasjs build -t viya
 ```
 
-<img src="https://i.imgur.com/ArrTyCY.png"> </img>
+![sasjs build console window](ArrTyCY.png)
 
 More info here:  https://cli.sasjs.io/build
 
@@ -335,7 +335,7 @@ Well done!  This is the first step in an iterative, GIT-centric, dev-ops orienta
 You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, execute and test your code, before finally merging to a development or main/master branch.
 
 
-![](https://camo.githubusercontent.com/ad8b29b31494a46a4c2526a8efa2e75743f974007a6a2eaf1fde8ce9d3159f28/68747470733a2f2f692e696d6775722e636f6d2f67495970354f472e706e67)
+![sasjs deploy workflow](deployworkflow.png)
 
 More details here:  https://cli.sasjs.io/deploy
 
@@ -371,7 +371,7 @@ The great benefit of using Doxygen is the ability to generate documentation for 
 
 The `sasjs doc` command will take metadata from the package.json file, use the README.md as a homepage, and even generate a data lineage graphviz diagram using the defined "Data Inputs" and "Data Outputs" in your program headers.  Clicking on a job will open the job in the documentation, and you can even click through the tables into the [Data Controller for SAS&reg;](https://datacontroller.io) Data Viewer.
 
-![](https://i.imgur.com/QOZDYra.png)
+![sasjs doc data lineage](lineage.png)
 
 The logo and other such settings can all be configured in the [docConfig](https://cli.sasjs.io/sasjsconfig.html#docConfig).
 
@@ -381,7 +381,7 @@ To run the command, simply execute:
 sasjs doc
 ```
 
-![](https://i.imgur.com/7oxNugk.png)
+![sasjs doc console window](sasjsdoc.png)
 
 The outputs will go into the sasjsbuild/docs folder.
 
