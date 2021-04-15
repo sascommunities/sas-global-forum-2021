@@ -226,7 +226,8 @@ That program can then be easily invoked anywhere in the actual job with a single
 
 The following diagram illustrates this concept, looking specifically at Services and Macros (the idea is the same for Jobs and Tests, with both Macros and Includes):
 
-![sasjs compile](sasjscompile.png)
+![sasjs compile](./sasjscompile.png)
+
 
 More info here:  https://cli.sasjs.io/compile
 
