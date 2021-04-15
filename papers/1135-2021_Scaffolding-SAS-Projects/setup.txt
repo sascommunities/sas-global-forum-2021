@@ -1,0 +1,5 @@
+python3 -m venv env
+. env/bin/activate
+export PIP_USER=false # if a gitpod env
+pip install -r requirements.txt
+python3 app.py --markdown-file README.md --output-dir /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects

@@ -28,6 +28,7 @@ From the command line: `python app.py`
 | `--csl` or `-c` | (optional) If you want the references to look different, you can use any valid [CSL](https://github.com/citation-style-language/styles).  |
 | `--include-tex` or `-t` | (optional) For debugging, manual adjustments, etc. |
 
+
 ### Gitpod Example
 
 From within the remote vscode terminal:
@@ -45,6 +46,7 @@ This will create a Markdown file called  DEMO.pdf in the `tools/notebook-to-pdf`
 ```bash
 python app.py --markdown-file ../../papers/0000-2021-Smith/My_amazing_SGF_paper.md
 ```
+
 
 ## TODO
 
