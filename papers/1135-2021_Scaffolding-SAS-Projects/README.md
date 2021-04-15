@@ -1,5 +1,5 @@
 ---
-PAPER_TITLE: Scaffolding SAS® Projects With NPM and SASjs
+PAPER_TITLE: Scaffolding SAS&reg; Projects With NPM and SASjs
 PAPER_AUTHORS: Allan Bowe
 PAPER_NUMBER: 1135-2021
 # follow instructions in /workspace/sas-global-forum-2021/tools/notebook-to-pdf/README.md and run below from THAT directory
@@ -67,7 +67,7 @@ For most of the rest of this paper we will be submitting terminal commands.  If
 
 To check you have everything installed correctly, try running:
 
-``` bash
+```
 npm -v
 ```
 
@@ -76,13 +76,13 @@ This should return a version number.  If not, go back and check your installati
 
 If you have a version number, you are ready to install the SASjs CLI.  Simply run:
 
-```bash
+```
 npm install -g @sasjs/cli
 ```
 
 This will install the SASjs CLI globally, such that you can run the `sasjs` command from any directory.  You can verify this by running:
 
-```bash
+```
 sasjs v
 ```
 
@@ -92,7 +92,7 @@ This will return the version number.  So - now that we have the CLI - we can get
 
 This command is used to create an initial project, from a template.  We'll use the jobs template.  Run the following commands to create a project called "sgf2021" and move into that directory.
 
-```bash
+```
 sasjs create sgf2021 -t jobs
 cd sgf2021
 ```
@@ -178,7 +178,7 @@ The SASjs approach is to compile ALL dependencies so each Job / Test / Service i
 
 To execute the compilation process then, simply run:
 
-```bash
+```
 sasjs compile
 ```
 This takes all the jobs/services/tests and creates the self-contained files inside the (temporary) "sasjsbuild" folder.
@@ -251,11 +251,11 @@ Targets can contain additional attributes, such as target-specfic jobs, tests, m
 
 To create our build back then, on the target named "viya", we will run:
 
-```bash
+```
 sasjs build -t viya
 ```
 
-![](https://i.imgur.com/ArrTyCY.png)
+<img src="https://i.imgur.com/ArrTyCY.png"> </img>
 
 More info here:  https://cli.sasjs.io/build
 
@@ -305,7 +305,7 @@ We need to assign credentials to the particular target (server details) to which
 
 The following command will give you a series of prompts to authenticate against the "viya" target - you can now enter your client / secret / serverUrl, click the URL to fetch the authorisation code, paste, and finally choose a Compute Context on which you'd like to perform operations.
 
-```bash
+```
 sasjs add cred -t viya
 ```
 
@@ -315,13 +315,13 @@ Your credentials will be added to a `.env.viya` file.  If you have multiple targ
 
 We're finally ready for blast off.  Run the following to deploy all your jobs / services / tests to the designated appLoc in the "viya" target:
 
-```bash
+```
 sasjs deploy -t viya
 ```
 
 You can also perform all three of the previous steps (compile, build, deploy) in just one short command:
 
-```bash
+```
 sajs cbd
 ```
 
@@ -340,7 +340,7 @@ So - what else is there?
 
 The benefit of using SASjs to execute your SAS jobs is mainly that you can store and browse the logs locally.  An example command looks like so:
 
-```bash
+```
 sasjs job execute jobs/extract/makedata1 -l sasjsbuild/makedata1.log -t viya
 ```
 
@@ -354,7 +354,7 @@ You can define a series of jobs, in waves, with dependencies, as part of an inpu
 
 Example invocation:
 
-```bash
+```
 sasjs flow execute -s sasjs/jobflow.json -l sasjsbuild --csvFile sasjsbuild/results.csv -t viya
 ```
 
@@ -372,7 +372,7 @@ The logo and other such settings can all be configured in the [docConfig](https:
 
 To run the command, simply execute:
 
-```bash
+```
 sasjs doc
 ```
 
