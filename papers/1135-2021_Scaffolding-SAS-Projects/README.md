@@ -327,8 +327,7 @@ sajs cbd
 
 Well done!  This is the first step in an iterative, GIT-centric, dev-ops orientated coding paradigm for SAS.
 
-You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, test your code, before finally merging to a development or main/master branch.
-
+You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, execute and test your code, before finally merging to a development or main/master branch.
 
 
 ![](https://camo.githubusercontent.com/ad8b29b31494a46a4c2526a8efa2e75743f974007a6a2eaf1fde8ce9d3159f28/68747470733a2f2f692e696d6775722e636f6d2f67495970354f472e706e67)
