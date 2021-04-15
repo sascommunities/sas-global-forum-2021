@@ -189,14 +189,15 @@ Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) can
 
 For this reason, the SAS Includes are first wrapped by `sasjs compile` into `put` statements against a user-designated fileref - where they can be subsequently `%include`'d.
 
-So, given a header like so:
+So, by inserting a header section in the following format:
+
 
 ```sas
   <h4> SAS Includes </h4>
   @li demotable_ddl.sas FREF1
 ```
 
-The compiled code will look something like this:
+The final, compiled, code will contain an initial section like this:
 
 ```sas
 filename FREF1 temp;
@@ -217,11 +218,15 @@ put '        primary key(tx_from, vara));';
 run;
 ```
 
-This program can then be easily invoked anywhere in job with a single line of code:
+That program can then be easily invoked anywhere in the actual job with a single line of code:
 
 ```sas
 %inc fref1;
 ```
+
+The following diagram illustrates this concept, looking specifically at Services and Macros (the idea is the same for Jobs and Tests, with both Macros and Includes):
+
+![](https://cli.sasjs.io/img/sasjscompile.png)
 
 More info here:  https://cli.sasjs.io/compile
 
