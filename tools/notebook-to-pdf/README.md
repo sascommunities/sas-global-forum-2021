@@ -2,7 +2,7 @@
 
 You _can_ export the Jupyter Notebooks to PDF (via LaTex) but when you do that through the notebook the styles are not applied. This tool allows us to apply the SGF paper styling from the `sugconf` latex class (with a couple of modifications for the quirks of Markdown).
 
-This tool is comes with a user beware notice. The extent of the test is the purest definition of "it works on my laptop".
+This tool is comes with a user beware notice. The extent of the testing on this tool is the purest definition of "it works on my laptop".
 
 ## Requirements
 
@@ -28,16 +28,23 @@ From the command line: `python app.py`
 | `--csl` or `-c` | (optional) If you want the references to look different, you can use any valid [CSL](https://github.com/citation-style-language/styles).  |
 | `--include-tex` or `-t` | (optional) For debugging, manual adjustments, etc. |
 
-#### Example
+
+### Gitpod Example
+
+From within the remote vscode terminal:
 
 ```bash
-git clone https://github.com/sascommunities/sas-global-forum-2021
-cd sas-global-forum-2021/tools/notebook-to-pdf
-python3 -m venv env
+cd tools/notebook-to-pdf
+python -m venv env
 . env/bin/activate
-export PIP_USER=false # if a gitpod env
 pip install -r requirements.txt
-python3 app.py --markdown-file /workspace/sas-global-forum-2021/tools/notebook-to-pdf/DEMO.md --output-dir /tmp
+python app.py --markdown-file ./DEMO.md
+```
+
+This will create a Markdown file called  DEMO.pdf in the `tools/notebook-to-pdf` directory. You could then create a PDF version of your own Markdown paper by running something like:
+
+```bash
+python app.py --markdown-file ../../papers/0000-2021-Smith/My_amazing_SGF_paper.md
 ```
 
 
