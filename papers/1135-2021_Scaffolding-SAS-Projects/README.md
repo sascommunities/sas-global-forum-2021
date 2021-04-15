@@ -119,7 +119,7 @@ Here you will see a number of files/folders:
 | tests              | Alternative location for storing tests.  Normally we recommend that tests are stored alongside the relevant Job/Service/Macro, eg `jobname.test.sas` or `macroname.test.sas`|
 | .vscode            | Folder containing VSCode dependencies, such as the default 80 char ruler, and the recommendation to use the SASjs extension. |
 
-This project is 'ready to build' however to explain the process, let's add a new job.
+This project is already 'ready to build' however to explain the process, let's add a new job.
 
 ### Adding a Job
 To add a job, simply add an "any_name_you_like.sas" file to any of the folders listed in the "sasjs/sasjsconfig.json" `jobFolders` array.  You could create a new folder to put it in (listed in this array) or use an existing one - such as jobs/load.
@@ -144,7 +144,7 @@ The header looks like this:
   @li example.sas
 
   <h4> SAS Includes </h4>
-  @li someprogram.sas
+  @li someprogram.sas MYREF
 
   <h4> Data Inputs </h4>
   @li somelib.ds1
@@ -185,7 +185,16 @@ This takes all the jobs/services/tests and creates the self-contained files insi
 
 Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) can be easily inserted into the beginning of the Job/Sevice, the SAS Includes are a bit trickier to manage - if SAS code is simply inserted into a Job, it is then executed at the start, which isn't that useful.
 
-For this reason, the SAS Includes are first wrapped in `put` statements to a user-designated fileref - where they can be subsequently `%include`'d.  The compiled code will then look something like this (where `FREF1` is user-provided):
+For this reason, the SAS Includes are first wrapped by `sasjs compile` into `put` statements against a user-designated fileref - where they can be subsequently `%include`'d.
+
+So, given a header like so:
+
+```sas
+  <h4> SAS Includes </h4>
+  @li demotable_ddl.sas FREF1
+```
+
+The compiled code will look something like this:
 
 ```sas
 filename FREF1 temp;
