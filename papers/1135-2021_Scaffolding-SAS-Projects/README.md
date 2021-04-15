@@ -351,7 +351,7 @@ The benefit of using SASjs to execute your SAS jobs is mainly that you can store
 sasjs job execute jobs/extract/makedata1 -l sasjsbuild/makedata1.log -t viya
 ```
 
-The job path can be relative (to the appLoc) or a full path.  The log path can also be relative (to the sasjs folder) or a full path.
+The job path can be relative (to the appLoc) or a full path.  The log path can also be relative (to the sasjs folder) or a full path.  This command could be used on it's own, or triggered as part of a scheduling tool such as Jenkins.
 
 More details here:  https://cli.sasjs.io/job
 
