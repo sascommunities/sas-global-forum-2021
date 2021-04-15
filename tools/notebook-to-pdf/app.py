@@ -361,7 +361,8 @@ def main():
             output_dir = notebook_dir
         else:
             output_dir = os.path.dirname(args.markdown_source[0])
-        
+    output_dir = os.path.abspath(output_dir)
+      
     # TODO: validate notebook metadata
 
     if args.markdown_source is not None and os.path.exists(args.markdown_source[0]):
