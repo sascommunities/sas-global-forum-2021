@@ -255,6 +255,8 @@ To create our build back then, on the target named "viya", we will run:
 sasjs build -t viya
 ```
 
+![](https://i.imgur.com/ArrTyCY.png)
+
 More info here:  https://cli.sasjs.io/build
 
 So, we have generated our build program and JSON file in the root of the `sasjsbuild` folder.  How to get that up to the server?
@@ -317,15 +319,17 @@ We're finally ready for blast off.  Run the following to deploy all your jobs / 
 sasjs deploy -t viya
 ```
 
-Well done!  This is the first step in an iterative, GIT-centric, dev-ops orientated coding paradigm for SAS.
-
-You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, test your code, before finally merging to a development or main/master branch.
-
 You can also perform all three of the previous steps (compile, build, deploy) in just one short command:
 
 ```bash
 sajs cbd
 ```
+
+Well done!  This is the first step in an iterative, GIT-centric, dev-ops orientated coding paradigm for SAS.
+
+You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, test your code, before finally merging to a development or main/master branch.
+
+
 
 ![](https://camo.githubusercontent.com/ad8b29b31494a46a4c2526a8efa2e75743f974007a6a2eaf1fde8ce9d3159f28/68747470733a2f2f692e696d6775722e636f6d2f67495970354f472e706e67)
 
