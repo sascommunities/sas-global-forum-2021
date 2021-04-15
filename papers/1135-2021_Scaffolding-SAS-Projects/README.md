@@ -183,6 +183,8 @@ sasjs compile
 ```
 This takes all the jobs/services/tests and creates the self-contained files inside the (temporary) "sasjsbuild" folder.
 
+![sasjs compile command](https://i.imgur.com/PGpILjA.png)
+
 Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) can be easily inserted into the beginning of the Job/Sevice, the SAS Includes are a bit trickier to manage - if SAS code is simply inserted into a Job, it is then executed at the start, which isn't that useful.
 
 For this reason, the SAS Includes are first wrapped by `sasjs compile` into `put` statements against a user-designated fileref - where they can be subsequently `%include`'d.
@@ -231,8 +233,8 @@ Given that we can have so many files, the next step is to create a portable "bui
 
 Running `sasjs build` will actually create two files:
 
-* A JSON file, used if deploying Jobs to Viya using the APIs
-* A SAS program, which can be executed to create Jobs/Services in both SAS 9 or SAS Viya.
+* A JSON file, used to deploy Jobs to Viya using the APIs
+* A SAS program, which can be executed to create Jobs/Services/Tests in both SAS 9 or SAS Viya.
 
 How do we know whether to generate a SAS Program to create Stored Processes (SAS 9) or Jobs (SAS Viya)?
 
