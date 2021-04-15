@@ -459,6 +459,7 @@ Your comments and questions are valued and encouraged. Contact the author at:
 
 * Email: allan.bowe@analytium.co.uk
 * LinkedIn: https://www.linkedin.com/in/allanbowe
+* Github: https://github.com/allanbowe
 
 SAS and all other SAS Institute Inc. product or service names are registered trademarks or trademarks of SAS Institue Inc. in the USA and other Countries &reg; indiciates USA registration.
 
