@@ -23,7 +23,7 @@ If you are a SAS Developer with two or more projects under your belt, you'll be 
 
 As it happens, this same situation applies also to JS (JavaScript) - a flexible and loosely typed language, often mis-used to create spaghetti projects that are hard to maintain and difficult to debug. 
 
-In response to this situation, various frameworks have evolved that 'wrap around' JS to provide structure and consistency in the way projects are built - such as React, Angular, and Vue.  This is great for application owners, making it easier to on-board new developers, and reducing the total cost of ownership, whilst maintaining development velocity as application complexity increases.
+In response to this situation, various frameworks have evolved that 'wrap around' JS to provide consistency and structure  in the way projects are built - such as React, Angular, and Vue.  This is great for application owners, making it easier to on-board new developers, and reducing the total cost of ownership, whilst maintaining development velocity as application complexity increases.
 
 
 The goal of SASjs is to provide such a framework for SAS - a structure, set of opinions, and suite of productivity tools.  This enables developers to spend more time on the things that matter - ie, rapid delivery of business value, to any SAS platform, in a repeatable and scalable fashion.
@@ -97,26 +97,26 @@ sasjs create sgf2021 -t jobs
 cd sgf2021
 ```
 
-Here you will see a number of files:
+Here you will see a number of files/folders:
 
 | File/Folder        | Description|
 |--------------------|----------------------------|
-| db                 | This folder contains the DDL for creating the various libraries.  It is split with one subfolder per libref.                                                                         |
-| .git               | System folder for managing GIT history                                                                                                                                               |
+| db                 | This folder contains the DDL for creating the various libraries.  It is split with one subfolder per libref.  |
+| .git               | System folder for managing GIT history  |
 | .github            | Contains example github actions should you wish to perform automated SASjs checks, eg as part of a pull request or merge                                                             |
 | .gitignore         | List of files and folders to be ignored by GIT (won't be committed to source control)     |
 | .gitpod.dockerfile | Used for gitpod demos, can be ignored / removed                           |
 | .gitpod.yml        | Used for gitpod demos, can be ignored / removed  |
-| includes           | Default location for SAS Programs to be %included in SAS Jobs, Services, or Tests                                                                                                    |
-| jobs| Main parent folder containing jobinit.sas and jobterm.sas as well as subdirectories for SAS Jobs  |
+| includes           | Default location for SAS Programs, to be `%include`d by SAS Jobs, Services, or Tests  |
+| jobs| Main parent folder containing `jobinit.sas` and `jobterm.sas` as well as subdirectories for SAS Jobs  |
 | macros             | Default location for SAS Macros |
 | node_modules       | System folder for storing third party packages, such as @sasjs/core|
 | package.json       | Main config file for the repo, lists all the project dependencies as well as example scripts (npm run SCRIPTNAME) and project metadata                                               |
 | package-lock.json  | System file for managing dependencies of dependencies|
 | README.md          | The main page describing your project.  Is also used as the homepage when running `sasjs doc`.|
 | sasjs              | The folder containing the `sasjsconfig.json` file, which contains the settings for the entire project - such as where the various files are located (both locally and remotely).     |
-| .sasjslint         | Settings used when checking SAS Jobs, Services, Tests, Macros and Programs for code quality issues such as encoded passwords, trailing spaces, macros without parentheses, etc etc.  |
-| tests              | Alternative location for storing tests.  Normally we recommend that tests live alongside the relevant Job/Service/Macro, eg jobname.test.sas or macroname.test.sas                   |
+| .sasjslint         | Settings used by `sasjs lint` to check SAS Jobs, Services, Tests, Macros and Programs for code quality issues such as encoded passwords, trailing spaces, macros without parentheses, etc etc.  |
+| tests              | Alternative location for storing tests.  Normally we recommend that tests are stored alongside the relevant Job/Service/Macro, eg `jobname.test.sas` or `macroname.test.sas`|
 | .vscode            | Folder containing VSCode dependencies, such as the default 80 char ruler, and the recommendation to use the SASjs extension. |
 
 This project is 'ready to build' however to explain the process, let's add a new job.
