@@ -409,7 +409,7 @@ The aim is to provide a very simple structure, that is very easy to extend, to e
 
 ## SASJS LINT
 
-A linter is used to examine source code for common problems, before it is deployed or committed to source control.  The [SASjs linter](https://github.com/sasjs/lint) is available in the [VS Code extension](https://github.com/sasjs/vscode-extension) (see "Problems" tab) or as a SASjs [ClI command](https://cli.sasjs.io/lint).
+A linter is used to examine source code for common problems, before it is deployed or committed to source control.  The [SASjs linter](https://github.com/sasjs/lint) is available in the [VS Code extension](https://github.com/sasjs/vscode-extension) (see "Problems" tab) or as a SASjs [CLI command](https://cli.sasjs.io/lint).
 
 The great thing about the command (`sasjs lint`) is that you can add it as a pre-commit hook, to prevent questionable code from making it into your repository!
 
