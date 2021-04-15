@@ -408,7 +408,7 @@ The great thing about the command (`sasjs lint`) is that you can add it as a pre
 
 What is questionable?  Good question.  It can vary from site to site.  For that reason, it's fully configurable.  To set up the config you can run `sasjs lint init`.  As of April 2021 we have the current settings, but plan to add many more:
 
-```JSON
+```json
 {
     "noEncodedPasswords": true,
     "hasDoxygenHeader": true,
