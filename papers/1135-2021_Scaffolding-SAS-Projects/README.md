@@ -452,6 +452,12 @@ Whilst primarily sponsored by [Analytium](https://analytium.co.uk) the project i
 * The developers of [Doxygen](https://www.doxygen.nl/index.html)
 * All the [customers](https://datacontroller.io/category/use-cases/) of [Data Controller](https://www.doxygen.nl/index.html) who funded the initial framework
 
+## FURTHER READING
+
+* [1124-2021 Building & Deploying Web Apps with SASjs CLI](https://communities.sas.com/t5/SAS-Global-Forum-Proceedings/Building-and-Deploying-Web-Apps-With-SASjs-CLI/ta-p/733564)
+* [1077-2021 Introduction to Doxygen](https://communities.sas.com/t5/SAS-Global-Forum-Proceedings/Introduction-to-Doxygen/ta-p/726318)
+* [1072-2021 Open Source SAS&reg; Macros: What? Where? How?](https://communities.sas.com/t5/SAS-Global-Forum-Proceedings/Open-Source-SAS-Macros-What-Where-How/ta-p/726316)
+
 
 ## CONTACT INFORMATION
 
