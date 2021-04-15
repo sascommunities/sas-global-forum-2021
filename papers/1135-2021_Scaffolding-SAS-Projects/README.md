@@ -2,8 +2,7 @@
 PAPER_TITLE: Scaffolding SAS&reg; Projects With NPM and SASjs
 PAPER_AUTHORS: Allan Bowe
 PAPER_NUMBER: 1135-2021
-# follow instructions in /workspace/sas-global-forum-2021/tools/notebook-to-pdf/README.md and run below from THAT directory
-# python3 app.py --markdown-file /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects/README.md --output-dir /workspace/sas-global-forum-2021/papers/1135-2021_Scaffolding-SAS-Projects
+# see setup.txt in this directory for build instructions
 ---
 
 ## ABSTRACT
@@ -168,11 +167,11 @@ That's as far as we'll go with modifying the repo - the rest of the paper is abo
 
 ## SASjs COMPILE
 
-The compilation process is about taking all of the dependencies (SAS Macros & Includes) and creating **one file per Job/Service/Test**.
+The compilation process involves scraping all of the dependencies listed in the program headers (SAS Macros & SAS Includes) and creating **one file per Job/Service/Test**.
 
 Why do this?  Isn't this against the philosophy of having a single macro definition, in a catalog or SASAUTOS fileref, and using it everywhere?
 
-Maybe this was a good idea back in the days when disk space was scarce, and developers worked without source control.  These days, thanks to tools like GIT, it's very easy to track changes to a file.  And with a move to container based runtimes, like Viya 4, there is a need to move away from OS filesystems.  Finally, if you have ever tried to debug a complex macro application, you'll quickly discover how challenging it can be to unearth all the underlying macros from a monolothic enterprise estate.
+Maybe this was a good idea back in the days when disk space was scarce, and developers worked without source control.  These days, thanks to tools like GIT, it's very easy to track changes to a file.  And with a move to container based runtimes, like Viya 4, there is a general need to move away from the use of OS filesystems.  Finally, if you have ever tried to debug a complex macro application, you'll quickly discover how challenging it can be to unearth all the underlying macros from a monolothic enterprise estate.
 
 The SASjs approach is to compile ALL dependencies so each Job / Test / Service is **fully self contained**, and can live inside the metadata of a Stored Process or a Viya Job description.  The impact on runtimes and storage is negligible, more than compensated by the ease of debugging and the portability of the jobs.  In addition, it becomes easy to track which jobs have which macros (as they must be listed in the program header in order to be compiled).
 
@@ -183,7 +182,7 @@ sasjs compile
 ```
 This takes all the jobs/services/tests and creates the self-contained files inside the (temporary) "sasjsbuild" folder.
 
-![sasjs compile command](PGpILjA.png)
+![](PGpILjA.png)
 
 Whilst SAS Macros (and in addition, the jobinit.sas / serviceinit.sas files) can be easily inserted into the beginning of the Job/Sevice, the SAS Includes are a bit trickier to manage - if SAS code is simply inserted into a Job, it is then executed at the start, which isn't that useful.
 
@@ -226,12 +225,14 @@ That program can then be easily invoked anywhere in the actual job with a single
 
 The following diagram illustrates this concept, looking specifically at Services and Macros (the idea is the same for Jobs and Tests, with both Macros and Includes):
 
-![sasjs compile](./sasjscompile.png)
+![](./sasjscompile.png)
 
 
 More info here:  https://cli.sasjs.io/compile
 
-What next?  We could have hundreds of these compiled files.  How do we push them all up to the SAS server?
+For info - "SAS Includes" used to be referred to as "SAS Programs" which you may see in some videos.  We changed the label to "SAS Includes" as this more accurately describes what happens with those programs.
+
+So - what next?  We could have hundreds of these compiled files.  How are we going to push each of them up to the SAS server?
 
 ## SASjs BUILD
 
@@ -261,7 +262,7 @@ To create our build back then, on the target named "viya", we will run:
 sasjs build -t viya
 ```
 
-![sasjs build console window](ArrTyCY.png)
+![](ArrTyCY.png)
 
 More info here:  https://cli.sasjs.io/build
 
@@ -281,12 +282,12 @@ For a Viya deploy, we are going to need a client/secret pair.
 
 ### Generating a Viya Token
 
-A client/secret pair is necessary to grant the SASjs CLI permission to deploy to Viya on your behalf. It's sensible therefore to grant the minimum permissions possible.  And also to ensure that you NEVER commit the resulting ACCESS / REFRESH token to GIT.
+A client/secret pair is necessary to grant the SASjs CLI permission to deploy to Viya on your behalf. It's sensible therefore to grant the minimum permissions possible.  It's also important to NEVER share your ACCESS_TOKEN or REFRESH_TOKEN, or to commit them to GIT.  They are passwords, effectively.
 
-We take the following security precautions:
+We take the following security precautions in SASjs projects:
 
-* Basic (user/pass) authentication is not supported.  Use authorization_code grant type when creating the client/secret.
-* Tokens are stored in a `.env` file that is included in `.gitignore` to prevent accidental commits
+* We use authorization_code grant type when creating the client/secret.  Basic (user/pass) authentication is not supported.
+* Tokens are stored in a `.env` file that is listed (with wildcards) in `.gitignore` to prevent accidental commits
 
 To generate your client/secret you will need the help of an administrator, who has the filesystem permissions to access the consul token.
 
@@ -307,9 +308,9 @@ Ok, you have your client & secret.  Now what?  Don't procrastinate.  Authenticat
 
 ### SASjs ADD CRED
 
-We need to assign credentials to the particular target (server details) to which we are deploying.  This makes sense if you consider that you could be deploying to multiple machines (dev / test /prod) or server types (sas9 / viya).
+We need to assign credentials to the particular target (server details) to which we are deploying.  This makes sense if you consider that you could be deploying to multiple machines (dev / test /prod) or server types (SAS9 / SASVIYA).
 
-The following command will give you a series of prompts to authenticate against the "viya" target - you can now enter your client / secret / serverUrl, click the URL to fetch the authorisation code, paste, and finally choose a Compute Context on which you'd like to perform operations.
+The following command will give you a series of prompts to authenticate against the "viya" target - you will need to enter your client / secret / serverUrl, click the URL to fetch the authorisation code, paste, and finally choose a Compute Context on which you'd like to perform operations.
 
 ```
 sasjs add cred -t viya
@@ -331,12 +332,12 @@ You can also perform all three of the previous steps (compile, build, deploy) in
 sajs cbd
 ```
 
-Well done!  This is the first step in an iterative, GIT-centric, dev-ops orientated coding paradigm for SAS.
+Well done!  This is the first step towards an iterative, GIT-centric, dev-ops orientated coding paradigm for your SAS development.
 
-You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, execute and test your code, before finally merging to a development or main/master branch.
+You can work safely (locally) in a feature branch, deploy your code to a personal `appLoc`, execute and test your code in isolation from other SAS users, before finally merging to a development or main/master branch.
 
 
-![sasjs deploy workflow](deployworkflow.png)
+![](deployworkflow.png)
 
 More details here:  https://cli.sasjs.io/deploy
 
@@ -372,7 +373,7 @@ The great benefit of using Doxygen is the ability to generate documentation for 
 
 The `sasjs doc` command will take metadata from the package.json file, use the README.md as a homepage, and even generate a data lineage graphviz diagram using the defined "Data Inputs" and "Data Outputs" in your program headers.  Clicking on a job will open the job in the documentation, and you can even click through the tables into the [Data Controller for SAS&reg;](https://datacontroller.io) Data Viewer.
 
-![sasjs doc data lineage](lineage.png)
+![](lineage.png)
 
 The logo and other such settings can all be configured in the [docConfig](https://cli.sasjs.io/sasjsconfig.html#docConfig).
 
@@ -382,7 +383,7 @@ To run the command, simply execute:
 sasjs doc
 ```
 
-![sasjs doc console window](sasjsdoc.png)
+![](sasjsdoc.png)
 
 The outputs will go into the sasjsbuild/docs folder.
 
@@ -412,7 +413,7 @@ A linter is used to examine source code for common problems, before it is deploy
 
 The great thing about the command (`sasjs lint`) is that you can add it as a pre-commit hook, to prevent questionable code from making it into your repository!
 
-What is questionable?  Good question.  It can vary from site to site.  For that reason, it's fully configurable.  To set up the config you can run `sasjs lint init`.  As of April 2021 we have the current settings, but plan to add many more:
+What is questionable?  Good question.  It can vary from site to site.  For that reason, it's fully configurable.  To set up the config you can run `sasjs lint init`.  As of April 2021 we have the settings below, but plan to add many more:
 
 ```
 {
@@ -444,9 +445,9 @@ If you'd benefit from the above, do get in touch.
 
 ## CONCLUSION
 
-SASjs was built originally to support [Data Controller](https://datacontroller.io) and the development of Web Apps on SAS.  Since then it has matured into an enterprise framework to enable Dev Ops and automated deployment for all types of SAS Platform.
+SASjs was built originally to support [Data Controller](https://datacontroller.io) and the development of Web Apps on SAS.  Since then it has matured into an enterprise framework to enable Dev Ops and automated deployment for SAS Programmers using all types of SAS Platform (Base SAS, SAS 9, SAS Viya).
 
-It is fully open source (MIT) and can be used for any purpose without encumbrances or a need for attribution.
+It is fully open source (MIT) and free for commercial use.
 
 Whilst primarily sponsored by [Analytium](https://analytium.co.uk) the project itself is independent and fully open for other collaborators.  We need help, and additional sponsors, and would love to hear from you!
 
