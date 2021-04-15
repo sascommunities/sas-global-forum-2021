@@ -1,0 +1,9 @@
+tasks:
+  - init: export PIP_USER=false && python3 -m pip install --upgrade pip 
+
+image:
+  file: .gitpod.dockerfile
+vscode:
+  extensions:
+    - sasjs.sasjs-for-vscode
+    - cweijan.vscode-office
