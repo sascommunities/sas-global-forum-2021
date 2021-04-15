@@ -226,7 +226,7 @@ That program can then be easily invoked anywhere in the actual job with a single
 
 The following diagram illustrates this concept, looking specifically at Services and Macros (the idea is the same for Jobs and Tests, with both Macros and Includes):
 
-![sasjs compile](https://cli.sasjs.io/img/sasjscompile.png)
+![sasjs compile](sasjscompile.png)
 
 More info here:  https://cli.sasjs.io/compile
 
@@ -248,7 +248,7 @@ And in which (logical) folder will they be created?
 The answer to these questions is contained in the **target**.  The target is defined in the `sasjs/sasjsconfig.json` file and contains (at a minimum):
 
 * Target `name`.  This is a one-word alias, used in the sasjs commands to refer to the target definition.
-* `appLoc`.  This represents the root folder in SAS Metadata or SAS Drive under which the content will be deployed.
+* `appLoc`.  The root folder in SAS Metadata or SAS Drive under which our content will be deployed.
 * `serverUrl`.  This is the server on which the assets will be deployed
 * `servertype`.  Either SAS9 or SASVIYA, this attribute tells `sasjs build` which type of program to create.
 
@@ -413,7 +413,7 @@ The great thing about the command (`sasjs lint`) is that you can add it as a pre
 
 What is questionable?  Good question.  It can vary from site to site.  For that reason, it's fully configurable.  To set up the config you can run `sasjs lint init`.  As of April 2021 we have the current settings, but plan to add many more:
 
-```json
+```
 {
     "noEncodedPasswords": true,
     "hasDoxygenHeader": true,
@@ -478,6 +478,7 @@ Other brand and product names are trademarks of their respective companies.
 
 ## Links
 
+* Github Organisation: https://github.com/sasjs
 * SASjs Main Site: https://sasjs.io
 * Macro Core docs: https://core.sasjs.io
 * CLI docs: https://cli.sasjs.io
