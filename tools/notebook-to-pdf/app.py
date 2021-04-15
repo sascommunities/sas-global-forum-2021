@@ -377,6 +377,7 @@ def main():
             else: 
                 csl_file = None
 
+            dir_util.copy_tree(os.path.abspath(os.path.dirname(args.markdown_source[0])), td)
             file_util.copy_file(args.markdown_source[0], td)
             file_util.copy_file('american-medical-association.csl', td)
             file_util.copy_file('header.tex', td)
