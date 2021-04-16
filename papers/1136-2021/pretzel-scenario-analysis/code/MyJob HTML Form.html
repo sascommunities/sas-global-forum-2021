@@ -1,0 +1,60 @@
+<!-- ------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------ 1136-2021 ------------------------------------- -->
+<!-- ---------- Modernizing Scenario Analysis with SAS Viya and Visual Analytics -------- -->
+<!-- ------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------ -->
+
+<!-- This webpage displays a form for users to change Price and Cost, then runs /Public/MyJob to generate a scenario -->
+
+<html lang="en">
+    <title>Pretzel Scenario</title>
+
+    <head>
+        <style type="text/css">
+
+            <!-- Change the font to be more Visual Analytics-like, and a wrapper div tag to add some padding -->
+            @font-face {
+              font-family:AvenirNext;
+              src:url("/SASJobExecution/images/AvenirNextforSAS.woff") format("woff");
+            }
+            
+            body {
+              font-family: AvenirNext,Helvetica,Arial,sans-serif;
+              text-rendering: optimizeLegibility;
+              -webkit-tap-highlight-color: rgba(0,0,0,0);
+              text-align: center
+            }
+            
+            .wrapper{padding-bottom:10px;}
+        </style>
+    </head>
+
+    <body>
+    
+        <!-- When users hit submit, the following URL is generated: -->
+        <!-- https://yourviyaserver.com/SASJobExecution/?_program=/Public/MyJob&_action=execute,wait&_csrf=csrf value goes here&price=2.49&cost=0.25 -->
+        
+        <form id="upload" action="/SASJobExecution/" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="_program" value="$PROGRAM$"/>    
+            <input type="hidden" name="_action" value="execute,wait"/>
+            <input type="hidden" name="_csrf" value="$CSRF$"/>  <!-- Cross-Site Request Forgery Token. Required for every Viya Job. -->
+                   
+            <p><b>Enter a Pretzel Scenario</b></p>
+            
+            <!-- Change the price -->
+            <div class="wrapper">
+                <label>Price (USD) <input type="text" name="price" placeholder="2.49"/></label>
+            </div>
+            
+            <!-- Change the cost -->
+            <div class="wrapper">
+                <label>Cost (USD) <input type="text" name="cost" placeholder="0.25"/></label>
+            </div>
+
+            <!-- Submit button -->
+            <input type="submit" id="submit" value="Submit"/> 
+            
+        </form>
+    </body>
+</html>
