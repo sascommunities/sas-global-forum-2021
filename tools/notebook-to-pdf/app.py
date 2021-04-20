@@ -344,7 +344,7 @@ def main():
     args = parseCmdArguments()
 
     if args.notebook_dir is not None:
-        if not os.path.exists(args.notebook_dir):
+        if not os.path.exists(args.notebook_dir[0]):
             logging.error("Output directory {} does not exist".format(args.notebook_dir[0]))
             system.exit(1)
         else:
@@ -417,11 +417,20 @@ def main():
             os.chdir(home)
     
     if args.notebook_dir is not None and os.path.exists(args.notebook_dir[0]):
-        nd = args.args.notebook_dir[0]
+        nd = args.notebook_dir[0]
         for file in os.listdir(nd):
             if file.endswith(".ipynb"):
                     with tempfile.TemporaryDirectory() as td:
                         print('Creating everything in ' + td)
+
+                        if args.bib_source is not None:
+                            file_util.copy_file(args.bib_source[0], td)
+
+                        if args.csl_source is not None:
+                            file_util.copy_file(args.csl_source[0], td)
+                            csl_file = os.path.basename(args.csl_source[0])
+                        else: 
+                            csl_file = None
 
                         dir_util.copy_tree(nd, td)
                         file_util.copy_file('header.tex', td)
@@ -434,8 +443,8 @@ def main():
 
                         if validateNotebook(file):
                             variables, markdown = extractNotebookData(file, td)
-                            
-                            md_file = file[:-6] + ".md"
+
+                            md_file = os.path.join(td, file[:-6] + ".md" )
                             tex_file = file[:-6] + ".tex"
                             pdf_file = file[:-6] + ".pdf"
 
@@ -443,14 +452,16 @@ def main():
 
                             writeMarkdownTempFile(md_file, markdown)
                             try:
-                                createSrcTex(md_file, tex_file, args.bib_source)
+                                createSrcTex(md_file, tex_file, args.bib_source, csl_file)
                                 createSgfTex(tex_file)
                                 populateVariables(full_tex, variables)
                                 createPdf(full_tex)
-                                
-                                file_util.copy_file(pdf_file, args.output_dir[0])
+
+                                file_util.copy_file(pdf_file, output_dir)
+                                print("{} created in {}".format(os.path.basename(pdf_file), output_dir))
                                 if args.include_tex:
-                                    file_util.copy_file(tex_file, args.output_dir[0])
+                                    file_util.copy_file(tex_file, output_dir)
+                                    print("{} file stored in {}".format(os.path.basename(tex_file), output_dir))
 
                             except Exception as e:
                                 print(str(e))
