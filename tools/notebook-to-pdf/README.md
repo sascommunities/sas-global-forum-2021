@@ -52,6 +52,6 @@ python app.py --markdown-file ../../papers/0000-2021-Smith/My_amazing_SGF_paper.
 
 - [X] Map HTML named entities to Latex commands https://tex.stackexchange.com/questions/37126/how-can-i-map-html-named-entities-to-latex-commands
 - [X] Allow someone to pass their own, or just a different, CSL.
-- [ ] Validate notebook metadata
+- [X] Validate notebook metadata
 - [ ] Workout how to possibly include text/html things from display_data nodes if notebook has been run  
 - [ ] Make this an independent executable so that people can just download and run it if they want to.

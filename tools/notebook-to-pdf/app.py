@@ -119,7 +119,44 @@ def parseCmdArguments():
 def validateNotebook(notebook):
     """
     """
-    return True
+    authors = False
+    number = False
+    title = False
+
+    with open(notebook, 'r') as f:
+        data = json.load(f)
+    
+    cells = data['cells']
+    for cell in cells:
+        if 'tags' in cell['metadata']:
+            if cell['cell_type'] == 'markdown':
+
+                if 'remove_cell' in cell['metadata']['tags']:
+                    continue 
+
+                # banner
+                if 'banner' in cell['metadata']['tags']:
+                    continue 
+
+                # authors
+                if 'authors' in cell['metadata']['tags']:
+                    authors = True
+                    continue
+
+                # paper number
+                if 'paper_number' in cell['metadata']['tags']:
+                    number = True
+                    continue
+                
+                # title
+                if 'title' in cell['metadata']['tags']:
+                    title = True
+                    continue
+    
+    if authors and number and title:
+        return True
+    else:
+        return False
 
 def writeMarkdownTempFile(file, markdown):
     try:
