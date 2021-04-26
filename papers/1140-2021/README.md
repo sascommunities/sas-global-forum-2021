@@ -45,7 +45,7 @@ Something to note is that typically, when we are measuring mean time to resoluti
 
 There is a strong correlation between customer satisfaction and low Mean Time To Resolution. Figure 1 illustrates the relationship between customer satisfaction and incident Mean Time To Resolution for a representative cross-section of global desktop support groups. The strong correlation between Mean Time To Resolution and customer satisfaction is readily apparent[@rumburgMetricMonthMean2012].
 
-![Incident Mean Time To Resolution vs. Customer Satisfaction](paper_proper.assets/mttr_and_customer_satisfaction.png)
+![Incident Mean Time To Resolution vs. Customer Satisfaction](mttr_and_customer_satisfaction.png)
 Another reason is that teams can measure track and measure their performance. This can be done individually at the administrator level at the team level, or even across teams. As we saw from how the metric is calculated, there are no specifics about the technologies used and its easy for people to understand. Plotting the metric makes sense to help see trends for periods like “same time last year” or “last quarter”. There is also potential for wider organizational benefit as if there is agreement of the definition of *resolve*d across the organization then it can be used by multiple teams to help the business understand their service levels.
 
 ### How can I improve my Mean Time To Resolution?
