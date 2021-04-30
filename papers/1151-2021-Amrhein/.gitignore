@@ -1,0 +1,5 @@
+.ipynb_checkpoints/
+env/
+.vscode/
+*.pyc
+sascfg_personal.py
