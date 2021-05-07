@@ -1,0 +1,13 @@
+name: sas-kernel
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - pip
+  - jupyterlab=3
+  - pip:
+    - saspy
+    - pandas
+    - sas_kernel
+    - jlab-create-sas-file
+    - sas2nb
