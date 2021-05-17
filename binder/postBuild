@@ -17,13 +17,14 @@
 #
 
 # install saspy from github to get latest code
-pip install git+https://git@github.com/sassoftware/saspy.git
+# pip install git+https://git@github.com/sassoftware/saspy.git
 
 # copy sascfg_personal.py to default location
 mkdir -p ~/.config/saspy/
 cp ./binder/sascfg_personal.py ~/.config/saspy/
 
-#set -ex
+# Install and activate SAS Kernel extensions for Jupyter Notebook 
+# (Jupyter Lab extensions are controled in environment.yml)
 jupyter kernelspec list
 jupyter nbextension list
 
