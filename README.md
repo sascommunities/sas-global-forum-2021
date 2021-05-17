@@ -32,8 +32,6 @@ This is a great way to try out the Markdown/Notebook to PDF conversion tool.
 
 ## Binder
 
-jld23 fork:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jld23/sas-global-forum-2021/HEAD)
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sascommunities/sas-global-forum-2021/HEAD)
 
