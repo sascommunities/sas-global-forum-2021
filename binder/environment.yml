@@ -6,7 +6,7 @@ dependencies:
   - pip
   - jupyterlab=3
   - pip:
-    - saspy
+    - saspy>=3.7.1
     - pandas
     - sas_kernel
     - jlab-create-sas-file
