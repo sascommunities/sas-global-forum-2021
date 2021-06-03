@@ -17,16 +17,20 @@ Code and Example Data for the first part of the paper, "Creating a Job to Run Sc
 - **pretzel_forecast.csv**: Baseline forecast data
 - **pretzel_scenario.csv**: Initial scenario for the dashboard
 
+.sas7bdat versions of the above also exist and are identical.
+
 ## Software Version Requirements
 Job and Code: Viya 3.4 or higher
 
 Report: Visual Analytics 8.5 or higher
 
 ## Instructions for Importing Data
-Import the following files as promoted CAS tables to the CASUSER CASLIB:
+Import the following files as promoted CAS tables to the PUBLIC CASLIB:
 
-- pretzel_forecast.csv
-- pretzel_scenario.csv
+- pretzel_forecast.csv OR pretzel_forecast.sas7bdat
+- pretzel_scenario.csv OR pretzel_scenario.sas7bdat
+
+Import the sas7bdat versions if you run into automated variable type identification problems when importing the .csv versions.
 
 These files should not be renamed. 
 
@@ -39,7 +43,7 @@ https://go.documentation.sas.com/doc/en/calcdc/3.5/calpromotion/n0djzpossyj6rrn1
 Individual SAS and HTML code are provided to manually add required code to the Viya Job MyJob. MyJob will need to be created and its parameters added accordingly. Please see the paper for configuration instructions.
 
 ### Instructions for Importing Reports
-If you are unable to import the JSON package, the Visual Analytics report can be manually imported. To manually import a Visual Analytics report, do the following:
+If you are unable to import the JSON package, or if the Visual Analytics report does not show up after importing the JSON package, the report can be manually imported. To manually import a Visual Analytics report, do the following:
 
 1. Download Pretzel Scenario VA 85 Dashboard.txt to your desktop
 2. Log in to SAS Visual Analytics and enter Editor mode
