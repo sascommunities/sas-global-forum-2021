@@ -19,6 +19,7 @@
 *
 * History: 14APR2019 stsztu | v1.0 - Initial coding
 *		   03JUN2021 stsztu | v1.1 - Final output goes to PUBLIC instead of CASUSER
+*                                  - Append=force added in case char lengths change on import
 \******************************************************************************/
 
 /******* Setup *******/
@@ -185,7 +186,7 @@ run;
 */
 
 %if(%sysfunc(exist(public.pretzel_scenario)) ) %then %do;
-    data public.pretzel_scenario(append=yes);
+    data public.pretzel_scenario(append=force);
         set casuser.pretzel_scenario_append;
     run;
 %end;
