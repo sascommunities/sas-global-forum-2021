@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><SASReport xmlns="http://www.sas.com/sasreportmodel/bird-4.2.4" label="Pretzel Forecast" refresh="fixed" refreshRate="5" createdLocale="en" createdVersion="4.2.4" dateCreated="2021-03-05T02:49:03Z" dateModified="2021-04-15T02:35:03Z" createdApplication="SAS Visual Analytics 8.5.1" lastModifiedApplication="SAS Visual Analytics 8.5.1" nextUniqueNameIndex="1598">
+﻿<?xml version="1.0" encoding="UTF-8"?><SASReport xmlns="http://www.sas.com/sasreportmodel/bird-4.2.4" label="Pretzel Scenario" refresh="fixed" refreshRate="5" createdLocale="en" createdVersion="4.2.4" dateCreated="2021-03-05T02:49:03Z" dateModified="2021-06-04T02:23:08Z" createdApplication="SAS Visual Analytics 8.5.1" lastModifiedApplication="SAS Visual Analytics 8.5.1" nextUniqueNameIndex="1769">
     <DataDefinitions>
         <ParentDataDefinition childQueryRelationship="independent" status="executable" dataSource="ds7" name="dd51">
             <BusinessItems>
@@ -42,8 +42,8 @@
         <ParentDataDefinition childQueryRelationship="independent" status="executable" dataSource="ds7" name="dd80">
             <BusinessItems>
                 <RelationalDataItem name="bi268" base="bi17"/>
-                <RelationalDataItem name="bi1583" base="bi18"/>
-                <RelationalDataItem name="bi1584" base="bi9"/>
+                <RelationalDataItem name="bi1754" base="bi18"/>
+                <RelationalDataItem name="bi1755" base="bi9"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd81">
                 <MultidimensionalQuery detail="false">
@@ -65,8 +65,8 @@
         <ParentDataDefinition childQueryRelationship="independent" status="executable" dataSource="ds7" name="dd105">
             <BusinessItems>
                 <RelationalDataItem name="bi272" base="bi16"/>
-                <RelationalDataItem name="bi1585" base="bi18"/>
-                <RelationalDataItem name="bi1586" base="bi9"/>
+                <RelationalDataItem name="bi1756" base="bi18"/>
+                <RelationalDataItem name="bi1757" base="bi9"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd106">
                 <MultidimensionalQuery detail="false">
@@ -90,7 +90,7 @@
                 <RelationalDataItem name="bi125" base="bi9"/>
                 <RelationalDataItem name="bi128" base="bi11"/>
                 <RelationalDataItem name="bi186" base="bi184"/>
-                <RelationalDataItem name="bi1587" base="bi18"/>
+                <RelationalDataItem name="bi1758" base="bi18"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd121">
                 <MultidimensionalQuery detail="false">
@@ -117,7 +117,7 @@
                 <RelationalDataItem name="bi140" base="bi9"/>
                 <RelationalDataItem name="bi142" base="bi11"/>
                 <RelationalDataItem name="bi189" base="bi188"/>
-                <RelationalDataItem name="bi1588" base="bi18"/>
+                <RelationalDataItem name="bi1759" base="bi18"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd143">
                 <MultidimensionalQuery detail="false">
@@ -142,8 +142,8 @@
         <ParentDataDefinition childQueryRelationship="independent" status="executable" dataSource="ds7" name="dd200">
             <BusinessItems>
                 <RelationalDataItem name="bi266" base="bi8"/>
-                <RelationalDataItem name="bi1589" base="bi18"/>
-                <RelationalDataItem name="bi1590" base="bi9"/>
+                <RelationalDataItem name="bi1760" base="bi18"/>
+                <RelationalDataItem name="bi1761" base="bi9"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd201">
                 <MultidimensionalQuery detail="false">
@@ -165,8 +165,8 @@
         <ParentDataDefinition childQueryRelationship="independent" status="executable" dataSource="ds7" name="dd211">
             <BusinessItems>
                 <RelationalDataItem name="bi270" base="bi15"/>
-                <RelationalDataItem name="bi1591" base="bi18"/>
-                <RelationalDataItem name="bi1592" base="bi9"/>
+                <RelationalDataItem name="bi1762" base="bi18"/>
+                <RelationalDataItem name="bi1763" base="bi9"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd212">
                 <MultidimensionalQuery detail="false">
@@ -199,7 +199,7 @@
                 <RelationalDataItem name="bi346" base="bi13"/>
                 <RelationalDataItem name="bi348" base="bi19"/>
                 <RelationalDataItem name="bi351" base="bi188"/>
-                <RelationalDataItem name="bi1593" base="bi18"/>
+                <RelationalDataItem name="bi1764" base="bi18"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd304">
                 <MultidimensionalQuery rowSubtotals="false" columnSubtotals="false" rowTotals="false" columnTotals="false" detail="false">
@@ -235,7 +235,7 @@
                 <RelationalDataItem name="bi715" base="bi9"/>
                 <RelationalDataItem name="bi718" base="bi11"/>
                 <RelationalDataItem name="bi726" base="bi630"/>
-                <RelationalDataItem name="bi1594" base="bi18"/>
+                <RelationalDataItem name="bi1765" base="bi18"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd719">
                 <MultidimensionalQuery detail="false">
@@ -267,8 +267,8 @@
                 <RelationalDataItem name="bi844" base="bi149"/>
                 <RelationalDataItem name="bi891" base="bi150"/>
                 <RelationalDataItem name="bi894" base="bi787"/>
-                <RelationalDataItem name="bi1595" base="bi18"/>
-                <RelationalDataItem name="bi1596" base="bi9"/>
+                <RelationalDataItem name="bi1766" base="bi18"/>
+                <RelationalDataItem name="bi1767" base="bi9"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="relational" name="dd846">
                 <RelationalQuery detail="false">
@@ -299,7 +299,7 @@
                 <RelationalDataItem name="bi712" base="bi185"/>
                 <RelationalDataItem name="bi1283" base="bi162"/>
                 <RelationalDataItem name="bi1286" base="bi163"/>
-                <RelationalDataItem name="bi1597" base="bi18"/>
+                <RelationalDataItem name="bi1768" base="bi18"/>
             </BusinessItems>
             <DataDefinition dataSource="ds7" type="multidimensional" name="dd1025">
                 <MultidimensionalQuery detail="false">
@@ -446,7 +446,7 @@
     </DataDefinitions>
     <DataSources>
         <DataSource label="PRETZEL_SCENARIO" type="relational" name="ds7">
-            <CasResource server="cas-shared-default" library="CASUSER(sasdemo)" table="PRETZEL_SCENARIO" locale="en_US"/>
+            <CasResource server="cas-shared-default" library="Public" table="PRETZEL_SCENARIO" locale="en_US"/>
             <BusinessItemFolder>
                 <DataItem name="bi8" label="Current Cost" xref="Cost" format="DOLLAR12.2" aggregation="average"/>
                 <DataItem name="bi9" xref="Date"/>
@@ -454,7 +454,6 @@
                 <DataItem name="bi11" label="Scenario Pretzels Sold" xref="scenario_forecast" format="COMMA12."/>
                 <DataItem name="bi12" xref="forecast_date"/>
                 <DataItem name="bi13" label="Scenario Lower 95% Confidence Limit (Quantity)" xref="scenario_l95" format="COMMA12."/>
-                <DataItem name="bi14" label="Actual Pretzels Sold" xref="QtySold"/>
                 <DataItem name="bi15" label="Current Price" xref="Price" format="DOLLAR12.2" aggregation="average"/>
                 <DataItem name="bi16" label="Scenario Price" xref="scenario_price" format="DOLLAR12.2" aggregation="average"/>
                 <DataItem name="bi17" label="Scenario Cost" xref="scenario_cost" format="DOLLAR12.2" aggregation="average"/>
@@ -529,7 +528,7 @@
                 <AggregateCalculatedItem dataType="double" name="bi832" label="Total % Difference (Quantity)" format="PERCENT12.1">
                     <Expression>div(aggregate(sum,all,round(minus(${bi11,raw},${bi10,raw}),1)),aggregate(sum,all,round(${bi10,raw},1)))</Expression>
                 </AggregateCalculatedItem>
-                <DataItem name="bi1138" xref="cost"/>
+                <DataItem name="bi1138" xref="Cost"/>
             </BusinessItemFolder>
             <AppliedFilters/>
         </DataSource>
@@ -553,7 +552,7 @@
         <Graph graphType="keyValue" supplementalVisuals="ve83" resultDefinitions="dd82" name="ve79" data="dd80" label="Key value - Scenario Cost 1" selectionDisabled="true" applyDynamicBrushes="no">
             <EditorProperties>
                 <Property key="isAutoLabel">true</Property>
-                <Property key="addedInteractionQueryDataItems">bi1583,bi1584</Property>
+                <Property key="addedInteractionQueryDataItems">bi1754,bi1755</Property>
             </EditorProperties>
 <![CDATA[<StatGraph border="false" opaque="false" missingValueDisplay="autolabel">
     <PadAttrs top="0px" bottom="0px" left="0px" right="0px"/>
@@ -585,7 +584,7 @@
         <Graph graphType="keyValue" supplementalVisuals="ve107" resultDefinitions="dd103" name="ve108" data="dd105" label="Key value - Scenario Price 1" selectionDisabled="true" applyDynamicBrushes="no">
             <EditorProperties>
                 <Property key="isAutoLabel">true</Property>
-                <Property key="addedInteractionQueryDataItems">bi1585,bi1586</Property>
+                <Property key="addedInteractionQueryDataItems">bi1756,bi1757</Property>
             </EditorProperties>
 <![CDATA[<StatGraph border="false" opaque="false" missingValueDisplay="autolabel">
     <PadAttrs top="0px" bottom="0px" left="0px" right="0px"/>
@@ -617,7 +616,7 @@
         <Graph graphType="bar" supplementalVisuals="ve123" resultDefinitions="dd122" name="ve119" data="dd120" label="Daily Difference" applyDynamicBrushes="yes" sourceInteractionVariables="bi125">
             <EditorProperties>
                 <Property key="isAutoLabel">false</Property>
-                <Property key="addedInteractionQueryDataItems">bi1587</Property>
+                <Property key="addedInteractionQueryDataItems">bi1758</Property>
             </EditorProperties>
             <Conditions>
                 <Condition ref="cd733">
@@ -701,7 +700,7 @@
         <Graph graphType="bar" supplementalVisuals="ve144" resultDefinitions="dd139" name="ve145" data="dd141" label="Cumulative Difference" applyDynamicBrushes="yes" sourceInteractionVariables="bi140">
             <EditorProperties>
                 <Property key="isAutoLabel">false</Property>
-                <Property key="addedInteractionQueryDataItems">bi1588</Property>
+                <Property key="addedInteractionQueryDataItems">bi1759</Property>
             </EditorProperties>
             <Conditions>
                 <Condition ref="cd1271">
@@ -785,7 +784,7 @@
         <Graph graphType="keyValue" supplementalVisuals="ve202" resultDefinitions="dd198" name="ve203" data="dd200" label="Key value - Current Cost 1" selectionDisabled="true" applyDynamicBrushes="no">
             <EditorProperties>
                 <Property key="isAutoLabel">true</Property>
-                <Property key="addedInteractionQueryDataItems">bi1589,bi1590</Property>
+                <Property key="addedInteractionQueryDataItems">bi1760,bi1761</Property>
             </EditorProperties>
 <![CDATA[<StatGraph border="false" opaque="false" missingValueDisplay="autolabel">
     <PadAttrs top="0px" bottom="0px" left="0px" right="0px"/>
@@ -815,7 +814,7 @@
         <Graph graphType="keyValue" supplementalVisuals="ve213" resultDefinitions="dd209" name="ve214" data="dd211" label="Key value - Current Price 1" selectionDisabled="true" applyDynamicBrushes="no">
             <EditorProperties>
                 <Property key="isAutoLabel">true</Property>
-                <Property key="addedInteractionQueryDataItems">bi1591,bi1592</Property>
+                <Property key="addedInteractionQueryDataItems">bi1762,bi1763</Property>
             </EditorProperties>
 <![CDATA[<StatGraph border="false" opaque="false" missingValueDisplay="autolabel">
     <PadAttrs top="0px" bottom="0px" left="0px" right="0px"/>
@@ -897,7 +896,7 @@
         <Crosstab layout="level" measureSizing="autoFill" resultDefinitions="dd305" name="ve302" data="dd303" label="Table" applyDynamicBrushes="yes" sourceInteractionVariables="bi313">
             <EditorProperties>
                 <Property key="isAutoLabel">false</Property>
-                <Property key="addedInteractionQueryDataItems">bi1593</Property>
+                <Property key="addedInteractionQueryDataItems">bi1764</Property>
             </EditorProperties>
             <Conditions>
                 <Condition ref="cd735">
@@ -967,7 +966,7 @@
         <Graph graphType="bar" supplementalVisuals="ve720" resultDefinitions="dd714" name="ve721" data="dd717" label="Cumulative Profit " applyDynamicBrushes="yes" sourceInteractionVariables="bi715">
             <EditorProperties>
                 <Property key="isAutoLabel">false</Property>
-                <Property key="addedInteractionQueryDataItems">bi1594</Property>
+                <Property key="addedInteractionQueryDataItems">bi1765</Property>
             </EditorProperties>
             <Conditions>
                 <Condition ref="cd729">
@@ -1045,7 +1044,7 @@
         <Text resultDefinitions="dd836" name="ve847" data="dd845" label="Summary" selectionDisabled="true" applyDynamicBrushes="no">
             <EditorProperties>
                 <Property key="isAutoLabel">false</Property>
-                <Property key="addedInteractionQueryDataItems">bi1595,bi1596</Property>
+                <Property key="addedInteractionQueryDataItems">bi1766,bi1767</Property>
             </EditorProperties>
             <Title><P class="styleForTitle_paragraph3"><Span class="styleForTitle_span1">Summary</Span></P></Title>
             <P><Span class="span13"><Span>If the price of a bag of jumbo pretzels is set to </Span><Span class="span14"><DynamicSpan variable="bi837"/></Span><Span>, </Span><Span class="span15">the total number of pretzel bags sold over two weeks </Span><Span>is estimated to be </Span><Span class="span16"><DynamicSpan variable="bi838"/><Span> compared to</Span></Span><Span> </Span><Span class="span17"><DynamicSpan variable="bi842"/></Span><Span> (</Span><Span class="span18"><DynamicSpan variable="bi843"/></Span><Span>).</Span></Span></P>
@@ -1079,7 +1078,7 @@
             <EditorProperties>
                 <Property key="baseLabel">Time Series Scenario with Band Plot</Property>
                 <Property key="isAutoLabel">false</Property>
-                <Property key="addedInteractionQueryDataItems">bi1597</Property>
+                <Property key="addedInteractionQueryDataItems">bi1768</Property>
             </EditorProperties>
 <![CDATA[<StatGraph border="false" opaque="false" includeMissingDiscrete="true" attrPriority="color" selectionMode="multiple" missingValueDisplay="autolabel">
     <PadAttrs top="0px" bottom="0px" left="0px" right="0px"/>
@@ -1244,11 +1243,9 @@
                 <TimeOpts splitTickValue="false" tickValueFormat="DATA"/>
             </XAxisOpts>
             <YAxisOpts gridDisplay="on" reverse="false">
-                <DiscreteOpts/>
                 <LinearOpts>
                     <TickValueFormatOpts extractScale="true"/>
                 </LinearOpts>
-                <TimeOpts/>
             </YAxisOpts>
         </LayoutPrototypeOverlay2D>
     </LayoutDataMatrix>
@@ -1801,16 +1798,6 @@
                             <Weight value="100%"/>
                         </Weights>
                     </ResponsiveLayout>
-                    <Visual ref="ve355" name="vi354">
-                        <ResponsiveConstraint>
-                            <WidthConstraint>
-                                <Width mediaTarget="mt3" preferredSizeBehavior="ignore" flexibility="flexible"/>
-                            </WidthConstraint>
-                            <HeightConstraint>
-                                <Height mediaTarget="mt3" preferredSizeBehavior="ignore" flexibility="flexible"/>
-                            </HeightConstraint>
-                        </ResponsiveConstraint>
-                    </Visual>
                     <Visual ref="ve1576" name="vi1575">
                         <ResponsiveConstraint>
                             <WidthConstraint>
@@ -1818,6 +1805,16 @@
                             </WidthConstraint>
                             <HeightConstraint>
                                 <Height mediaTarget="mt3" preferredSizeBehavior="honor" flexibility="fixed"/>
+                            </HeightConstraint>
+                        </ResponsiveConstraint>
+                    </Visual>
+                    <Visual ref="ve355" name="vi354">
+                        <ResponsiveConstraint>
+                            <WidthConstraint>
+                                <Width mediaTarget="mt3" preferredSizeBehavior="ignore" flexibility="flexible"/>
+                            </WidthConstraint>
+                            <HeightConstraint>
+                                <Height mediaTarget="mt3" preferredSizeBehavior="ignore" flexibility="flexible"/>
                             </HeightConstraint>
                         </ResponsiveConstraint>
                     </Visual>
@@ -1831,27 +1828,27 @@
     <Interactions>
         <Interaction name="ia84" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve79" variable="bi1583"/>
+            <InteractionElementReference purpose="target" ref="ve79" variable="bi1754"/>
         </Interaction>
         <Interaction name="ia110" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve108" variable="bi1585"/>
+            <InteractionElementReference purpose="target" ref="ve108" variable="bi1756"/>
         </Interaction>
         <Interaction name="ia124" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve119" variable="bi1587"/>
+            <InteractionElementReference purpose="target" ref="ve119" variable="bi1758"/>
         </Interaction>
         <Interaction name="ia147" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve145" variable="bi1588"/>
+            <InteractionElementReference purpose="target" ref="ve145" variable="bi1759"/>
         </Interaction>
         <Interaction name="ia205" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve203" variable="bi1589"/>
+            <InteractionElementReference purpose="target" ref="ve203" variable="bi1760"/>
         </Interaction>
         <Interaction name="ia216" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve214" variable="bi1591"/>
+            <InteractionElementReference purpose="target" ref="ve214" variable="bi1762"/>
         </Interaction>
         <Interaction name="ia282" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56"/>
@@ -1863,19 +1860,19 @@
         </Interaction>
         <Interaction name="ia306" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve302" variable="bi1593"/>
+            <InteractionElementReference purpose="target" ref="ve302" variable="bi1764"/>
         </Interaction>
         <Interaction name="ia63" type="filter" dataStage="detail" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve35" variable="bi1597"/>
+            <InteractionElementReference purpose="target" ref="ve35" variable="bi1768"/>
         </Interaction>
         <Interaction name="ia723" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve721" variable="bi1594"/>
+            <InteractionElementReference purpose="target" ref="ve721" variable="bi1765"/>
         </Interaction>
         <Interaction name="ia851" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve56" variable="bi1353"/>
-            <InteractionElementReference purpose="target" ref="ve847" variable="bi1595"/>
+            <InteractionElementReference purpose="target" ref="ve847" variable="bi1766"/>
         </Interaction>
         <Interaction name="ia877" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50"/>
@@ -1883,7 +1880,7 @@
         </Interaction>
         <Interaction name="ia878" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50" variable="bi191"/>
-            <InteractionElementReference purpose="target" ref="ve847" variable="bi1596"/>
+            <InteractionElementReference purpose="target" ref="ve847" variable="bi1767"/>
         </Interaction>
         <Interaction name="ia879" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50"/>
@@ -1891,19 +1888,19 @@
         </Interaction>
         <Interaction name="ia880" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50" variable="bi191"/>
-            <InteractionElementReference purpose="target" ref="ve214" variable="bi1592"/>
+            <InteractionElementReference purpose="target" ref="ve214" variable="bi1763"/>
         </Interaction>
         <Interaction name="ia882" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50" variable="bi191"/>
-            <InteractionElementReference purpose="target" ref="ve203" variable="bi1590"/>
+            <InteractionElementReference purpose="target" ref="ve203" variable="bi1761"/>
         </Interaction>
         <Interaction name="ia883" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50" variable="bi191"/>
-            <InteractionElementReference purpose="target" ref="ve108" variable="bi1586"/>
+            <InteractionElementReference purpose="target" ref="ve108" variable="bi1757"/>
         </Interaction>
         <Interaction name="ia885" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50" variable="bi191"/>
-            <InteractionElementReference purpose="target" ref="ve79" variable="bi1584"/>
+            <InteractionElementReference purpose="target" ref="ve79" variable="bi1755"/>
         </Interaction>
         <Interaction name="ia886" type="filter" derived="true">
             <InteractionElementReference purpose="source" ref="ve50" variable="bi191"/>
@@ -2217,15 +2214,15 @@
     <ViewerCapabilities viewerCustomizationThreshold="1"/>
     <History>
         <Versions>
-            <Version key="4.2.4" lastDate="2021-04-15T02:40:48Z"/>
+            <Version key="4.2.4" lastDate="2021-06-04T02:25:04Z"/>
         </Versions>
         <Editors>
             <Editor applicationName="VA">
-                <Revision editorVersion="8.5.1" lastDate="2021-04-15T02:35:03.873Z"/>
+                <Revision editorVersion="8.5.1" lastDate="2021-06-04T02:23:07.991Z"/>
             </Editor>
         </Editors>
     </History>
-    <SASReportState date="2021-04-15T01:57:08Z">
+    <SASReportState date="2021-06-03T18:58:57Z">
         <View/>
     </SASReportState>
 </SASReport>

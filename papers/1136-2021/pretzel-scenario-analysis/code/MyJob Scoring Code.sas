@@ -10,15 +10,16 @@
 * Parameters (macro variables): price | Sale price of jumbo pretzels
 *                               cost  | Cost per bag of jumbo pretzels
 *
-* Input Data: sashelp.snacks            | Dataset to modify and score
-*             casuser.pretzel_forecast  | Baseline pretzel forecast. Automatically created if it is not loaded to CASUSER.
-* Output Data: casuser.pretzel_scenario | Promoted CAS table used by the Pretzel Scenario dashboard
+* Input Data:  sashelp.snacks          | Dataset to modify and score
+*              public.pretzel_forecast | Baseline pretzel forecast. Automatically created if it is not loaded to CASUSER.
+* Output Data: public.pretzel_scenario | Promoted CAS table used by the Pretzel Scenario dashboard
 *                                         located in /Public/Pretzel Scenario
 *   
 * Requirements: This program is expected to run from the Job Execution Service in Viya 3.4 or higher.
 *
 * History: 14APR2019 stsztu | v1.0 - Initial coding
-*
+*		   03JUN2021 stsztu | v1.1 - Final output goes to PUBLIC instead of CASUSER
+*                                  - Append=force added in case char lengths change on import
 \******************************************************************************/
 
 /******* Setup *******/
@@ -29,6 +30,7 @@
 
 /* Start a CAS session */
 cas;
+libname public cas caslib='public';
 libname casuser cas caslib='casuser';
 
 /* Current datetime the user ran the scenario */
@@ -39,7 +41,7 @@ libname casuser cas caslib='casuser';
 /* The below code will create an initial baseline forecast dataset if it does not yet exist in your CAS session.
    In practice, this table will likely always exist and will always be loaded.
 */
-%if(%sysfunc(exist(casuser.pretzel_forecast)) = 0) %then %do;
+%if(%sysfunc(exist(public.pretzel_forecast)) = 0) %then %do;
 
     data pretzel_forecast_data;
         set sashelp.snacks;
@@ -62,7 +64,7 @@ libname casuser cas caslib='casuser';
     run;
 
     /* Create an initial forecast dataset for Visual Analytics & scenario analysis */
-    data casuser.pretzel_forecast(promote=yes);
+    data public.pretzel_forecast(promote=yes);
         format forecast_date date9.;
         merge  casuser.outfor_forecast
                pretzel_forecast_data(keep=date advertised price holiday)
@@ -97,7 +99,7 @@ proc sql noprint;
          , max(forecast_date)
     into :last_actual_date
        , :max_forecast_date
-    from casuser.pretzel_forecast
+    from public.pretzel_forecast
     where NOT missing(QtySold)
     having forecast_date = max(forecast_date)
     ;
@@ -133,8 +135,8 @@ data casuser.pretzel_scenario_append;
     length user $32.;
     format scenario_datetime datetime.;
     merge /* Original forecast and price. This typically would come from the original forecast data. */
-          casuser.pretzel_forecast(keep  = date price cost forecast forecast_date
-                                   where = (forecast_date = &max_forecast_date)
+          public.pretzel_forecast(keep  = date price cost forecast forecast_date
+                                  where = (forecast_date = &max_forecast_date)
           )
  
           /* Scenario output forecast */
@@ -183,18 +185,18 @@ run;
            both tables in CAS. If it does not yet exist, create the dataset
 */
 
-%if(%sysfunc(exist(casuser.pretzel_scenario)) ) %then %do;
-    data casuser.pretzel_scenario(append=yes);
+%if(%sysfunc(exist(public.pretzel_scenario)) ) %then %do;
+    data public.pretzel_scenario(append=force);
         set casuser.pretzel_scenario_append;
     run;
 %end;
     %else %do;
-        data casuser.pretzel_scenario;
+        data public.pretzel_scenario;
             set casuser.pretzel_scenario_append;
         run;
     %end;
 
 /* Permanently save the new results to disk */
-proc casutil incaslib='casuser' outcaslib='casuser';
+proc casutil incaslib='public' outcaslib='public';
     save casdata='pretzel_scenario' replace;
 run;
